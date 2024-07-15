@@ -104,7 +104,7 @@ then
   fi
 elif [ "$1" == "uninstall" ]
 then
-  bash ./uninstall
+  bash /usr/gsh/script-files/uninstall
 elif [ "$1" == "--help" ]
 then
   cat /usr/gsh/messages/help/help.txt
