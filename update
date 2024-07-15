@@ -1,0 +1,66 @@
+#!/usr/bin/env bash
+asciilogo=$(cat gsh/messages/ascii-art/ascii-logo.txt)
+echo "Have you made any changes to the current files that you'd like saved or would you like to save this version for later? yes/no:"
+read ans
+ans=$(echo "$ans" | awk '{print toupper($0)}')
+if [ "$ans" == "YES" ]
+then
+    if [ -f /usr/bin/sudo ]
+    then
+        if [ $EUID -eq 0 ]
+        then
+            echo "$asciilogo"
+            echo "Backing up current version to preserve the local changes. All backed up files will be in the gshbak directory located at $PWD"
+            mkdir -p ./gshbak
+            cp -r /usr/gsh ./gshbak
+            echo "Backup completed!"
+            echo "Overwriting files now"
+            cp -r ./gsh /usr
+            echo "Update Completed! Thank You! :)"
+        elif [ $EUID -ge 1000 ]
+        then
+            echo "$asciilogo"
+            echo "Backing up current version to preserve the local changes. All backed up files will be in the gshbak directory located at $PWD"
+            mkdir -p ./gshbak
+            cp -r /usr/gsh ./gshbak
+            echo "Backup completed!"
+            echo "Overwriting files now"
+            sudo cp -r ./gsh /usr
+            echo "Update Completed! Thank You! :)"
+        fi
+    elif ! [ -f /usr/bin/sudo ]
+    then
+        echo "$asciilogo"
+        echo "Backing up current version to preserve the local changes. All backed up files will be in the gshbak directory located at $PWD"
+        mkdir -p ./gshbak
+        cp -r /usr/gsh ./gshbak
+        echo "Backup completed!"
+        echo "Overwriting files now"
+        cp -r ./gsh /usr
+        echo "Update Completed! Thank You! :)"
+    fi
+elif [ "$ans" == "NO" ]
+then
+    if [ -f /usr/bin/sudo ]
+    then
+        if [ $EUID -eq 0 ]
+        then
+            echo "$asciilogo"
+            echo "Updating now!"
+            cp -r ./gsh /usr
+            echo "Update Completed! Thank You! :)"
+        elif [ $EUID -ge 1000 ]
+        then
+            echo "$asciilogo"
+            echo "Updating now!"
+            sudo cp -r ./gsh /usr
+            echo "Update Completed! Thank You! :)"
+        fi
+    elif ! [ -f /usr/bin/sudo ]
+    then
+        echo "$asciilogo"
+        echo "Updating now!"
+        cp -r ./gsh /usr
+        echo "Update Completed! Thank You! :)"
+    fi
+fi

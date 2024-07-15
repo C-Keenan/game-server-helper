@@ -1,0 +1,10 @@
+Usage:  gsh satisfactory COMMAND
+
+Commands:
+  up           Brings local satisfactory docker instance up using 'Docker Compose'
+  down         Brings local satisfactory docker instance down using 'Docker Compose'
+  pull         Pulls the satisfactory docker image specified in /usr/gsh/docker/satisfactory/docker-compose.yml
+  logs         Same as if you ran 'docker compose logs' in /usr/gsh/docker/satisfactory
+  tail-logs    Same as if you ran 'docker compose logs -f' in /usr/gsh/docker/satisfactory
+  
+  --help       Shows this message

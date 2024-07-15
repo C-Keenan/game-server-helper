@@ -1,0 +1,319 @@
+#!/usr/bin/env bash
+asciilogo=$(cat gsh/messages/ascii-art/ascii-logo.txt)
+echo "$asciilogo"
+printf '\n'
+echo "Would you like to install 'Game Server Helper'? yes/no"
+read rsp
+rsp=$(echo $rsp | awk '{print tolower($0)}')
+clear
+
+if [ -f /usr/bin/sudo ]
+then
+    if [ $EUID -eq 0 ]
+    then
+        if [ "$rsp" == "yes" ]
+        then
+            if [ -d /usr/gsh ]
+            then
+                als=$(cat /${HOME}/.bashrc | grep gsh)
+                if [ "$als" == "" ]
+                then
+                    echo "alias gsh='bash /usr/gsh/script-files/gsh'" >> ~/.bashrc
+                    source ~/.bashrc
+                fi
+                cp -r ./gsh /usr 2>/dev/null
+                if [ -f /usr/bin/docker ]
+                then
+                    echo "Docker detected. Not installing Docker and Docker Compose."
+                elif ! [ -f /usr/bin/docker ]
+                then
+                    echo "Docker not detected."
+                    echo "Please wait patiently for installation to finish."
+                    sleep 10
+                    bash add-docker-repo-nosudo 2>/dev/null 1>/dev/null
+                    apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin 2>/dev/null 1>/dev/null
+                    echo "Would you like to make sure the docker system installed properly by running 'docker run hello-world'? yes/no"
+                    read rsp3
+                    rsp3=$(echo $rsp3 | awk '{print tolower($0)}')
+                    if [ $rsp3 == 'yes' ]
+                    then
+                        docker run hello-world
+                    elif [ $rsp3 == 'no' ]
+                    then
+                        echo "Understood."
+                    fi
+                fi
+                if [ -f /usr/bin/colrm ]
+                then
+                    echo "Colrm utility already installed. Skipping step."
+                elif ! [ -f /usr/bin/colrm ]
+                then
+                    echo "Colrm utility not detected."
+                    echo "Please wait patiently for installation to finish."
+                    sleep 10
+                    apt-get install -y util-linux 2>/dev/null 1>/dev/null
+                    echo "Installation of util-linux(contains colrm utility) finished."
+                fi
+            elif ! [ -d /usr/gsh ]
+            then
+                mkdir -p /usr/gsh
+                als=$(cat /${HOME}/.bashrc | grep gsh)
+                if [ "$als" == "" ]
+                then
+                    echo "alias gsh='bash /usr/gsh/script-files/gsh'" >> ~/.bashrc
+                fi
+                cp -r ./gsh /usr 2>/dev/null
+                if [ -f /usr/bin/docker ]
+                then
+                    echo "Docker detected. Not installing Docker and Docker Compose."
+                elif ! [ -f /usr/bin/docker ]
+                then
+                    echo "Docker not detected."
+                    echo "Please wait patiently for installation to finish."
+                    sleep 10
+                    bash add-docker-repo-nosudo 2>/dev/null 1>/dev/null
+                    apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin 2>/dev/null 1>/dev/null
+                    echo "Would you like to make sure the docker system installed properly by running 'docker run hello-world'? yes/no"
+                    read rsp3
+                    rsp3=$(echo $rsp3 | awk '{print tolower($0)}')
+                    if [ $rsp3 == 'yes' ]
+                    then
+                        docker run hello-world
+                    elif [ $rsp3 == 'no' ]
+                    then
+                        echo "Understood."
+                    fi
+                fi
+                if [ -f /usr/bin/colrm ]
+                then
+                    echo "Colrm utility already installed. Skipping step."
+                elif ! [ -f /usr/bin/colrm ]
+                then
+                    echo "Colrm utility not detected."
+                    echo "Please wait patiently for installation to finish."
+                    sleep 10
+                    apt-get install -y util-linux 2>/dev/null 1>/dev/null
+                    echo "Installation of util-linux(contains colrm utility) finished."
+                fi
+            fi
+            echo "$asciilogo"
+            printf '\n'
+            echo "Thank you for 'installing' Game Server Helper!"
+            echo "If you have any feature requests please reach"
+            echo "out to dev+gsh-feature-requests@lollypopstealer.com"
+            echo "with any game's that can run through docker or"
+            echo "that have easy to read documentation for running"
+            echo "their server on linux. Have a great day!"
+        elif [ $rsp == 'no' ]
+        then
+            echo "$asciilogo"
+            echo "Thank you for running the install script for 'Game Server Helper', however, you did not confirm the installation so the script will now exit. Have a great day!"
+        fi
+    elif [ $EUID -ge 1000 ]
+    then
+        if [ $rsp == 'yes' ]
+        then
+            if [ -d /usr/gsh ]
+            then
+                als=$(cat /${HOME}/.bashrc | grep gsh)
+                if [ "$als" == "" ]
+                then
+                    sudo echo "alias gsh='bash /usr/gsh/script-files/gsh'" >> ~/.bashrc
+                    source ~/.bashrc
+                fi
+                sudo cp -r ./gsh /usr 2>/dev/null
+                if [ -f /usr/bin/docker ]
+                then
+                    echo "Docker detected. Not installing Docker and Docker Compose."
+                    sudo usermod -aG docker ${USER}
+                elif ! [ -f /usr/bin/docker ]
+                then
+                    echo "Docker not detected."
+                    echo "Please wait patiently for installation to finish."
+                    sleep 10
+                    bash add-docker-repo 2>/dev/null 1>/dev/null
+                    sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin 2>/dev/null 1>/dev/null
+                    sudo usermod -aG docker ${USER}
+                    echo "Would you like to make sure the docker system installed properly by running 'docker run hello-world'? yes/no"
+                    read rsp3
+                    rsp3=$(echo $rsp3 | awk '{print tolower($0)}')
+                    if [ $rsp3 == 'yes' ]
+                    then
+                        sudo docker run hello-world
+                    elif [ $rsp3 == 'no' ]
+                    then
+                        echo "Understood."
+                    fi
+                fi
+                if [ -f /usr/bin/colrm ]
+                then
+                    echo "Colrm utility already installed. Skipping step."
+                elif ! [ -f /usr/bin/colrm ]
+                then
+                    echo "Colrm utility not detected."
+                    echo "Please wait patiently for installation to finish."
+                    sleep 10
+                    sudo apt-get install -y util-linux 2>/dev/null 1>/dev/null
+                    echo "Installation of util-linux(contains colrm utility) finished."
+                fi
+            elif ! [ -d /usr/gsh ]
+            then
+                sudo mkdir -p /usr/gsh
+                als=$(cat /${HOME}/.bashrc | grep gsh)
+                if [ "$als" == "" ]
+                then
+                    sudo echo "alias gsh='bash /usr/gsh/script-files/gsh'" >> ~/.bashrc
+                fi
+                sudo cp -r ./gsh /usr 2>/dev/null
+                if [ -f /usr/bin/docker ]
+                then
+                    echo "Docker detected. Not installing Docker and Docker Compose."
+                    sudo usermod -aG docker ${USER}
+                elif ! [ -f /usr/bin/docker ]
+                then
+                    echo "Docker not detected."
+                    echo "Please wait patiently for installation to finish."
+                    sleep 10
+                    bash add-docker-repo 2>/dev/null 1>/dev/null
+                    sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin 2>/dev/null 1>/dev/null
+                    sudo usermod -aG docker ${USER}
+                    echo "Would you like to make sure the docker system installed properly by running 'docker run hello-world'? yes/no"
+                    read rsp3
+                    rsp3=$(echo $rsp3 | awk '{print tolower($0)}')
+                    if [ $rsp3 == 'yes' ]
+                    then
+                        sudo docker run hello-world
+                    elif [ $rsp3 == 'no' ]
+                    then
+                        echo "Understood."
+                    fi
+                fi
+                if [ -f /usr/bin/colrm ]
+                then
+                    echo "Colrm utility already installed. Skipping step."
+                elif ! [ -f /usr/bin/colrm ]
+                then
+                    echo "Colrm utility not detected."
+                    echo "Please wait patiently for installation to finish."
+                    sleep 10
+                    sudo apt-get install -y util-linux 2>/dev/null 1>/dev/null
+                    echo "Installation of util-linux(contains colrm utility) finished."
+                fi
+            fi
+            echo "$asciilogo"
+            printf '\n'
+            echo "Thank you for 'installing' Game Server Helper!"
+            echo "If you have any feature requests please reach"
+            echo "out to dev+gsh-feature-requests@lollypopstealer.com"
+            echo "with any game's that can run through docker or"
+            echo "that have easy to read documentation for running"
+            echo "their server on linux. Have a great day!"
+        elif [ $rsp == 'no' ]
+        then
+            echo "$asciilogo"
+            echo "Thank you for running the install script for 'Game Server Helper', however, you did not confirm the installation so the script will now exit. Have a great day!"
+        fi
+    fi
+elif ! [ -f /usr/bin/sudo ]
+then
+    if [ $rsp == 'yes' ]
+    then
+        if [ -d /usr/gsh ]
+        then
+            als=$(cat /${HOME}/.bashrc | grep gsh)
+                if [ "$als" == "" ]
+                then
+                    echo "alias gsh='bash /usr/gsh/script-files/gsh'" >> ~/.bashrc
+                    source ~/.bashrc
+                fi
+            cp -r ./gsh /usr 2>/dev/null
+            if [ -f /usr/bin/docker ]
+            then
+                echo "Docker detected. Not installing Docker and Docker Compose."
+            elif ! [ -f /usr/bin/docker ]
+            then
+                echo "Docker not detected."
+                echo "Please wait patiently for installation to finish."
+                sleep 10
+                bash add-docker-repo-nosudo 2>/dev/null 1>/dev/null
+                apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin 2>/dev/null 1>/dev/null
+                usermod -aG docker ${USER}
+                echo "Would you like to make sure the docker system installed properly by running 'docker run hello-world'? yes/no"
+                read rsp3
+                rsp3=$(echo $rsp3 | awk '{print tolower($0)}')
+                if [ $rsp3 == 'yes' ]
+                then
+                    docker run hello-world
+                elif [ $rsp3 == 'no' ]
+                then
+                    echo "Understood."
+                fi
+            fi
+            if [ -f /usr/bin/colrm ]
+            then
+                echo "Colrm utility already installed. Skipping step."
+            elif ! [ -f /usr/bin/colrm ]
+            then
+                echo "Colrm utility not detected."
+                echo "Please wait patiently for installation to finish."
+                sleep 10
+                apt-get install -y util-linux 2>/dev/null 1>/dev/null
+            fi
+        elif ! [ -d /usr/gsh ]
+        then
+            mkdir -p /usr/gsh
+            als=$(cat /${HOME}/.bashrc | grep gsh)
+            if [ "$als" == "" ]
+            then
+                echo "alias gsh='bash /usr/gsh/script-files/gsh'" >> ~/.bashrc
+                source ~/.bashrc
+            fi
+            cp -r ./gsh /usr 2>/dev/null
+            if [ -f /usr/bin/docker ]
+            then
+                echo "Docker detected. Not installing Docker and Docker Compose."
+            elif ! [ -f /usr/bin/docker ]
+            then
+                echo "Docker not detected."
+                echo "Please wait patiently for installation to finish."
+                sleep 10
+                bash add-docker-repo-nosudo 2>/dev/null 1>/dev/null
+                apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin 2>/dev/null 1>/dev/null
+                usermod -aG docker ${USER}
+                echo "Docker installation finished"
+                echo "Would you like to make sure the docker system installed properly by running 'docker run hello-world'? yes/no"
+                read rsp3
+                rsp3=$(echo $rsp3 | awk '{print tolower($0)}')
+                if [ $rsp3 == 'yes' ]
+                then
+                    docker run hello-world
+                elif [ $rsp3 == 'no' ]
+                then
+                    echo "Understood."
+                fi
+            fi
+            if [ -f /usr/bin/colrm ]
+            then
+                echo "Colrm utility already installed. Skipping step."
+            elif ! [ -f /usr/bin/colrm ]
+            then
+                echo "Colrm utility not detected."
+                echo "Please wait patiently for installation to finish."
+                sleep 10
+                apt-get install -y util-linux 2>/dev/null 1>/dev/null
+            fi
+        fi
+        echo "$asciilogo"
+        printf '\n'
+        echo "Thank you for 'installing' Game Server Helper!"
+        echo "If you have any feature requests please reach"
+        echo "out to dev+gsh-feature-requests@lollypopstealer.com"
+        echo "with any game's that can run through docker or"
+        echo "that have easy to read documentation for running"
+        echo "their server on linux. Have a great day!"
+    elif [ $rsp == 'no' ]
+    then
+        echo "$asciilogo"
+        echo "Thank you for running the install script for 'Game Server Helper', however, you did not confirm the installation so the script will now exit. Have a great day!"
+    fi
+fi

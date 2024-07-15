@@ -1,0 +1,41 @@
+services:
+  satisfactory:
+    container_name: 'satisfactory'
+    hostname: 'satisfactory'
+    image: 'wolveix/satisfactory-server:latest'
+    ports:
+      - '7777:7777/udp'
+      - '15000:15000/udp'
+      - '15777:15777/udp'
+    volumes:
+      - './config:/config'
+    environment:
+      - AUTOPAUSE=false
+      - AUTOSAVEINTERVAL=600
+      - AUTOSAVENUM=2
+      - AUTOSAVEONDISCONNECT=true
+      - CRASHREPORT=true
+      - DEBUG=false
+      - DISABLESEASONALEVENTS=false
+      - MAXPLAYERS=4
+      - MAXOBJECTS=2162688 #this is currently the default value for Satisfactory as shipped
+      - MAXTICKRATE=30
+      - NETWORKQUALITY=3
+      - PGID=1001
+      - PUID=1001
+      - ROOTLESS=false
+      - SERVERBEACONPORT=15000
+      - SERVERGAMEPORT=7777
+      - SERVERIP=0.0.0.0
+      - SERVERQUERYPORT=15777
+      - SERVERSTREAMING=true
+      - STEAMBETA=true
+      - SKIPUPDATE=true
+      - TIMEOUT=30
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 12G
+        reservations:
+          memory: 4G

@@ -1,0 +1,10 @@
+Usage:  gsh veloren COMMAND
+
+Commands:
+  up           Brings local veloren docker instance up using 'Docker Compose'
+  down         Brings local veloren docker instance down using 'Docker Compose'
+  pull         Pulls the veloren docker image specified in /usr/gsh/docker/veloren/docker-compose.yml
+  logs         Same as if you ran 'docker compose logs' in /usr/gsh/docker/veloren
+  tail-logs    Same as if you ran 'docker compose logs -f' in /usr/gsh/docker/veloren
+  
+  --help       Shows this message
