@@ -19,7 +19,6 @@ then
                 if [ "$als" == "" ]
                 then
                     echo "alias gsh='bash /usr/gsh/script-files/gsh'" >> ~/.bashrc
-                    source ~/.bashrc
                 fi
                 cp -r ./gsh /usr 2>/dev/null
                 if [ -f /usr/bin/docker ]
@@ -119,7 +118,6 @@ then
                 if [ "$als" == "" ]
                 then
                     sudo echo "alias gsh='bash /usr/gsh/script-files/gsh'" >> ~/.bashrc
-                    source ~/.bashrc
                 fi
                 sudo cp -r ./gsh /usr 2>/dev/null
                 if [ -f /usr/bin/docker ]
@@ -224,7 +222,6 @@ then
                 if [ "$als" == "" ]
                 then
                     echo "alias gsh='bash /usr/gsh/script-files/gsh'" >> ~/.bashrc
-                    source ~/.bashrc
                 fi
             cp -r ./gsh /usr 2>/dev/null
             if [ -f /usr/bin/docker ]
@@ -266,7 +263,6 @@ then
             if [ "$als" == "" ]
             then
                 echo "alias gsh='bash /usr/gsh/script-files/gsh'" >> ~/.bashrc
-                source ~/.bashrc
             fi
             cp -r ./gsh /usr 2>/dev/null
             if [ -f /usr/bin/docker ]
