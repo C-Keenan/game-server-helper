@@ -7,7 +7,7 @@ then
     docker compose -f /usr/gsh/docker/factorio/docker-compose.yml up -d
   elif [ "$2" == "down" ]
   then
-    x=$(($(cat /usr/gsh/docker/factorio/factorio/config/server-settings.json | grep autosave_interval | awk 'FNR==2{print$0}' | colrm 1 23 | colrm 3)*60))
+    x=$(($(cat /usr/gsh/docker/factorio/config/server-settings.json | grep autosave_interval | awk 'FNR==2{print$0}' | colrm 1 23 | colrm 3)*60))
     echo "Container will be stopped in $((x/60)) minutes to allow for a save to happen. Terminal will be unresponsive during this time. Please do something else for now or come back in $((x/60)) minutes."
     while [ $x -ge 0 ]
     do
@@ -45,19 +45,7 @@ then
     docker compose -f /usr/gsh/docker/satisfactory/docker-compose.yml up -d
   elif [ "$2" == "down" ]
   then
-    x=$(cat /usr/gsh/docker/satisfactory/docker-compose.yml | grep AUTOSAVEINTERVAL | colrm 1 25)
-    echo "Container will be stopped in $((x/60)) minutes to allow for a save to happen. Terminal will be unresponsive during this time. Please do something else for now or come back in $((x/60)) minutes."
-    while [ $x -ge 0 ]
-    do
-      if [ $x -gt 0 ]
-      then
-        x="$((x-1))"
-        sleep 1
-      else
-        docker compose -f /usr/gsh/docker/satisfactory/docker-compose.yml down
-        break
-      fi
-    done
+    docker compose -f /usr/gsh/docker/satisfactory/docker-compose.yml down
   elif [ "$2" == "logs" ]
   then
     docker compose -f /usr/gsh/docker/satisfactory/docker-compose.yml logs
