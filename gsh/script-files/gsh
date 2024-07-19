@@ -13,8 +13,10 @@ then
     do
       if [ $x -gt 0 ]
       then
-        x="$((x-1))"
+        printf '%dh:%dm:%ds\n' $(($x/3600)) $(($x%3600/60)) $(($x%60))
+        x=$((x-1))
         sleep 1
+        clear
       else
         docker compose -f /usr/gsh/docker/factorio/docker-compose.yml down
         break
