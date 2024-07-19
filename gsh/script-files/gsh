@@ -8,7 +8,6 @@ then
   elif [ "$2" == "down" ]
   then
     x=$(($(cat /usr/gsh/docker/factorio/config/server-settings.json | grep autosave_interval | awk 'FNR==2{print$0}' | colrm 1 23 | colrm 3)*60))
-    echo "Container will be stopped in $((x/60)) minutes to allow for a save to happen. Terminal will be unresponsive during this time. Please do something else for now or come back in $((x/60)) minutes."
     while [ $x -ge 0 ]
     do
       if [ $x -gt 0 ]
