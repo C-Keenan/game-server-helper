@@ -7,20 +7,25 @@ then
     docker compose -f /usr/gsh/docker/factorio/docker-compose.yml up -d
   elif [ "$2" == "down" ]
   then
-    x=$(($(cat /usr/gsh/docker/factorio/config/server-settings.json | grep autosave_interval | awk 'FNR==2{print$0}' | colrm 1 23 | colrm 3)*60))
-    while [ $x -ge 0 ]
-    do
-      if [ $x -gt 0 ]
-      then
-        printf '%dh:%dm:%ds\n' $(($x/3600)) $(($x%3600/60)) $(($x%60))
-        x=$((x-1))
-        sleep 1
-        clear
-      else
-        docker compose -f /usr/gsh/docker/factorio/docker-compose.yml down
-        break
-      fi
-    done
+    if [ "$3" == "--now" ]
+    then
+      docker compose -f /usr/gsh/docker/factorio/docker-compose.yml down
+    else
+      x=$(($(cat /usr/gsh/docker/factorio/config/server-settings.json | grep autosave_interval | awk 'FNR==2{print$0}' | colrm 1 23 | colrm 3)*60))
+      while [ $x -ge 0 ]
+      do
+        if [ $x -gt 0 ]
+        then
+          printf '%dh:%dm:%ds\n' $(($x/3600)) $(($x%3600/60)) $(($x%60))
+          x=$((x-1))
+          sleep 1
+          clear
+        else
+          docker compose -f /usr/gsh/docker/factorio/docker-compose.yml down
+          break
+        fi
+      done
+    fi
   elif [ "$2" == "logs" ]
   then
     docker compose -f /usr/gsh/docker/factorio/docker-compose.yml logs
