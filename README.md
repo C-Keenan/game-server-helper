@@ -10,7 +10,7 @@
 
 - If you set the RCON Password after updating to this version please be sure to ALWAYS say yes when running the update script in the future as it will be over-written by the script
 
-- Symobols in RCON Password not supported when setting environment variable please use alpha-numerics only (letters and numbers)
+- Symbols in RCON Password not supported when setting environment variable please use alpha-numerics only (letters and numbers)
 
 - factorio help text updated to show new '--now' option
 
