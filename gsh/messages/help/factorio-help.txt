@@ -3,6 +3,8 @@ Usage:  gsh factorio COMMAND
 Commands:
   up           Brings local factorio docker instance up using 'Docker Compose'
   down         Brings local factorio docker instance down using 'Docker Compose'
+  Options:
+    --now      Brings down the factorio container immediately instead of waiting for an auto-save
   pull         Pulls the factorio docker image specified in /usr/gsh/docker/factorio/docker-compose.yml
   logs         Same as if you ran 'docker compose logs' in /usr/gsh/docker/factorio
   tail-logs    Same as if you ran 'docker compose logs -f' in /usr/gsh/docker/factorio

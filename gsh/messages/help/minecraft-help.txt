@@ -1,0 +1,10 @@
+Usage:  gsh veloren COMMAND
+
+Commands:
+  up           Brings local minecraft docker instance up using 'Docker Compose'
+  down         Brings local minecraft docker instance down using 'Docker Compose'
+  pull         Pulls the minecraft docker image specified in /usr/gsh/docker/minecraft/docker-compose.yml
+  logs         Same as if you ran 'docker compose logs' in /usr/gsh/docker/minecraft
+  tail-logs    Same as if you ran 'docker compose logs -f' in /usr/gsh/docker/minecraft
+  
+  --help       Shows this message

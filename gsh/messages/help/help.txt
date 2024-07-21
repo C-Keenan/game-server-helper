@@ -4,6 +4,7 @@ Commands:
   factorio         Manages local factorio docker instance
   satisfactory     Manages local satisfactory docker instance
   veloren          Manages local veloren docker instance
+  mincraft         Manages local minecraft docker instance
 
   uninstall        Uninstalls 'Game Server Helper' files from system and removes aliases used to run script from $HOME/.bashrc
 
