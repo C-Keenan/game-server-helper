@@ -19,7 +19,7 @@ then
           clear
           printf '%dh:%dm:%ds\n' $(($x/3600)) $(($x%3600/60)) $(($x%60))
           x=$((x-1))
-          sleep 1
+          sleep 0.999999999999
         else
           docker compose -f /usr/gsh/docker/factorio/docker-compose.yml down
           break

@@ -2,6 +2,10 @@
 
 ## Release Notes
 
+### Release 07/21/2024 P2
+
+- Updated timer component of factorio down command to be more accurate to the actual second no promises that it will be completely accurate but is definitely closely accurate with the clock timer on my phone
+
 ### Release 07/21/2024
 
 - Added minecraft to the list of supported game servers
