@@ -95,6 +95,28 @@ then
                     echo "Installation of util-linux(contains colrm utility) finished."
                 fi
             fi
+            if ! [ -d /usr/gsh/environment ]
+            then
+                mkdir -p /usr/gsh/environment
+                cp ./examples/donation-ctrl.env /usr/gsh/environment/donation-ctrl.env
+                cp ./examples/donation-ticker.env /usr/gsh/environment/donation-ticker.env
+            fi
+            if ! [ -f /usr/gsh/docker/factorio/factorio.env ]
+            then
+                cp ./examples/factorio.env /usr/gsh/docker/factorio/factorio.env
+            fi
+            if ! [ -f /usr/gsh/docker/satisfactory/satisfactory.env ]
+            then
+                cp ./examples/satisfactory.env /usr/gsh/docker/satisfactory/satisfactory.env
+            fi
+            if ! [ -f /usr/gsh/docker/minecraft/minecraft.env ]
+            then
+                cp ./examples/minecraft.env /usr/gsh/docker/minecraft/minecraft.env
+            fi
+            if ! [ -f /usr/gsh/docker/veloren/veloren.env ]
+            then
+                cp ./examples/veloren.env /usr/gsh/docker/veloren/veloren.env
+            fi
             echo "$asciilogo"
             printf '\n'
             echo "Thank you for 'installing' Game Server Helper!"
@@ -198,6 +220,28 @@ then
                     echo "Installation of util-linux(contains colrm utility) finished."
                 fi
             fi
+            if ! [ -d /usr/gsh/environment ]
+            then
+                sudo mkdir -p /usr/gsh/environment
+                sudo cp ./examples/donation-ctrl.env /usr/gsh/environment/donation-ctrl.env
+                sudo cp ./examples/donation-ticker.env /usr/gsh/environment/donation-ticker.env
+            fi
+            if ! [ -f /usr/gsh/docker/factorio/factorio.env ]
+            then
+                sudo cp ./examples/factorio.env /usr/gsh/docker/factorio/factorio.env
+            fi
+            if ! [ -f /usr/gsh/docker/satisfactory/satisfactory.env ]
+            then
+                sudo cp ./examples/satisfactory.env /usr/gsh/docker/satisfactory/satisfactory.env
+            fi
+            if ! [ -f /usr/gsh/docker/minecraft/minecraft.env ]
+            then
+                sudo cp ./examples/minecraft.env /usr/gsh/docker/minecraft/minecraft.env
+            fi
+            if ! [ -f /usr/gsh/docker/veloren/veloren.env ]
+            then
+                sudo cp ./examples/veloren.env /usr/gsh/docker/veloren/veloren.env
+            fi
             echo "$asciilogo"
             printf '\n'
             echo "Thank you for 'installing' Game Server Helper!"
@@ -298,6 +342,28 @@ then
                 sleep 10
                 apt-get install -y util-linux 2>/dev/null 1>/dev/null
             fi
+        fi
+        if ! [ -d /usr/gsh/environment ]
+        then
+            mkdir -p /usr/gsh/environment
+            cp ./examples/donation-ctrl.env /usr/gsh/environment/donation-ctrl.env
+            cp ./examples/donation-ticker.env /usr/gsh/environment/donation-ticker.env
+        fi
+        if ! [ -f /usr/gsh/docker/factorio/factorio.env ]
+        then
+            cp ./examples/factorio.env /usr/gsh/docker/factorio/factorio.env
+        fi
+        if ! [ -f /usr/gsh/docker/satisfactory/satisfactory.env ]
+        then
+            cp ./examples/satisfactory.env /usr/gsh/docker/satisfactory/satisfactory.env
+        fi
+        if ! [ -f /usr/gsh/docker/minecraft/minecraft.env ]
+        then
+            cp ./examples/minecraft.env /usr/gsh/docker/minecraft/minecraft.env
+        fi
+        if ! [ -f /usr/gsh/docker/veloren/veloren.env ]
+        then
+            cp ./examples/veloren.env /usr/gsh/docker/veloren/veloren.env
         fi
         echo "$asciilogo"
         printf '\n'
