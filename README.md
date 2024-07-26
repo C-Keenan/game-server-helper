@@ -8,7 +8,7 @@
 
 - Potential use cases for the database are, currently, as follows
 
-    1. Non-'sudo' implementation of donation-ticker to show a donation reminder message when you've run the 'command' if '$dt' equals '30'
+    1. Non-'sudo' implementation of donation-ticker to show a donation reminder message when you've run the 'command' if '$dt' is evenly divisible by '30'
 
     1. User logging to show when a user runs the command and what game or service they interacted with so server admins can facilitate support to users
 
