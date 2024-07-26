@@ -258,9 +258,9 @@ then
             then
                 sudo mkdir -p /usr/gsh/environment
                 sudo touch /usr/gsh/environment/donation-ticker.env
-                echo "dt=0" >> /usr/gsh/environment/donation-ticker.env
+                sudo echo "dt=0" >> /usr/gsh/environment/donation-ticker.env
                 sudo touch /usr/gsh/environment/donation-ctrl.env
-                echo "donationmessage=0" >> /usr/gsh/environment/donation-ctrl.env
+                sudo echo "donationmessage=0" >> /usr/gsh/environment/donation-ctrl.env
             fi
             if ! [ -f /usr/gsh/docker/factorio/factorio.env ]
             then
