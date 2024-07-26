@@ -1,149 +1,302 @@
 #!/usr/bin/env bash
 
-if [ "$1" == "factorio" ]
+if [ -f /usr/bin/sudo ]
 then
-  if [ "$2" == "up" ]
+  if [ "$1" == "factorio" ]
   then
-    docker compose -f /usr/gsh/docker/factorio/docker-compose.yml up -d
-  elif [ "$2" == "down" ]
-  then
-    if [ "$3" == "--now" ]
+    if [ "$2" == "up" ]
     then
-      docker compose -f /usr/gsh/docker/factorio/docker-compose.yml down
-    else
-      x=$(($(cat /usr/gsh/docker/factorio/config/server-settings.json | grep autosave_interval | awk 'FNR==2{print$0}' | colrm 1 23 | colrm 3)*60))
-      while [ $x -ge 0 ]
-      do
-        if [ $x -gt 0 ]
-        then
-          clear
-          printf '%dh:%dm:%ds\n' $(($x/3600)) $(($x%3600/60)) $(($x%60))
-          x=$((x-1))
-          sleep 0.999999999999
-        else
-          docker compose -f /usr/gsh/docker/factorio/docker-compose.yml down
-          break
-        fi
-      done
+      docker compose -f /usr/gsh/docker/factorio/docker-compose.yml up -d
+    elif [ "$2" == "down" ]
+    then
+      if [ "$3" == "--now" ]
+      then
+        docker compose -f /usr/gsh/docker/factorio/docker-compose.yml down
+      else
+        x=$(($(cat /usr/gsh/docker/factorio/config/server-settings.json | grep autosave_interval | awk 'FNR==2{print$0}' | colrm 1 23 | colrm 3)*60))
+        while [ $x -ge 0 ]
+        do
+          if [ $x -gt 0 ]
+          then
+            clear
+            printf '%dh:%dm:%ds\n' $(($x/3600)) $(($x%3600/60)) $(($x%60))
+            x=$((x-1))
+            sleep 0.999999999999
+          else
+            docker compose -f /usr/gsh/docker/factorio/docker-compose.yml down
+            break
+          fi
+        done
+      fi
+    elif [ "$2" == "logs" ]
+    then
+      docker compose -f /usr/gsh/docker/factorio/docker-compose.yml logs
+    elif [ "$2" == "pull" ]
+    then
+      docker compose -f /usr/gsh/docker/factorio/docker-compose.yml pull
+    elif [ "$2" == "tail-logs" ]
+    then
+      docker compose -f /usr/gsh/docker/factorio/docker-compose.yml logs -f
+    elif [ "$2" == "--help" ]
+    then
+      cat /usr/gsh/messages/help/factorio-help.txt
+      printf '\n'
+    elif [ "$2" == "" ]
+    then
+      cat /usr/gsh/messages/help/factorio-help.txt
+      printf '\n'
     fi
-  elif [ "$2" == "logs" ]
+  elif [ "$1" == "satisfactory" ]
   then
-    docker compose -f /usr/gsh/docker/factorio/docker-compose.yml logs
-  elif [ "$2" == "pull" ]
+    if [ "$2" == "up" ]
+    then
+      docker compose -f /usr/gsh/docker/satisfactory/docker-compose.yml up -d
+    elif [ "$2" == "down" ]
+    then
+      docker compose -f /usr/gsh/docker/satisfactory/docker-compose.yml down
+    elif [ "$2" == "logs" ]
+    then
+      docker compose -f /usr/gsh/docker/satisfactory/docker-compose.yml logs
+    elif [ "$2" == "pull" ]
+    then
+      docker compose -f /usr/gsh/docker/satisfactory/docker-compose.yml pull
+    elif [ "$2" == "tail-logs" ]
+    then
+      docker compose -f /usr/gsh/docker/satisfactory/docker-compose.yml logs -f
+    elif [ "$2" == "--help" ]
+    then
+      cat /usr/gsh/messages/help/satisfactory-help.txt
+      printf '\n'
+    elif [ "$2" == "" ]
+    then
+      cat /usr/gsh/messages/help/satisfactory-help.txt
+      printf '\n'
+    fi
+  elif [ "$1" == "veloren" ]
   then
-    docker compose -f /usr/gsh/docker/factorio/docker-compose.yml pull
-  elif [ "$2" == "tail-logs" ]
+    if [ "$2" == "up" ]
+    then
+      docker compose -f /usr/gsh/docker/veloren/docker-compose.yml up -d
+    elif [ "$2" == "down" ]
+    then
+      docker compose -f /usr/gsh/docker/veloren/docker-compose.yml down
+    elif [ "$2" == "logs" ]
+    then
+      docker compose -f /usr/gsh/docker/veloren/docker-compose.yml logs
+    elif [ "$2" == "pull" ]
+    then
+      docker compose -f /usr/gsh/docker/veloren/docker-compose.yml pull
+    elif [ "$2" == "tail-logs" ]
+    then
+      docker compose -f /usr/gsh/docker/veloren/docker-compose.yml logs -f
+    elif [ "$2" == "--help" ]
+    then
+      cat /usr/gsh/messages/help/veloren-help.txt
+      printf '\n'
+    elif [ "$2" == "" ]
+    then
+      cat /usr/gsh/messages/help/veloren-help.txt
+      printf '\n'
+    fi
+  elif [ "$1" == "minecraft" ]
   then
-    docker compose -f /usr/gsh/docker/factorio/docker-compose.yml logs -f
-  elif [ "$2" == "--help" ]
+    if [ "$2" == "up" ]
+    then
+      docker compose -f /usr/gsh/docker/minecraft/docker-compose.yml up -d
+    elif [ "$2" == "down" ]
+    then
+      docker compose -f /usr/gsh/docker/minecraft/docker-compose.yml down
+    elif [ "$2" == "logs" ]
+    then
+      docker compose -f /usr/gsh/docker/minecraft/docker-compose.yml logs
+    elif [ "$2" == "pull" ]
+    then
+      docker compose -f /usr/gsh/docker/minecraft/docker-compose.yml pull
+    elif [ "$2" == "tail-logs" ]
+    then
+      docker compose -f /usr/gsh/docker/minecraft/docker-compose.yml logs -f
+    elif [ "$2" == "--help" ]
+    then
+      cat /usr/gsh/messages/help/minecraft-help.txt
+      printf '\n'
+    elif [ "$2" == "" ]
+    then
+      cat /usr/gsh/messages/help/minecraft-help.txt
+      printf '\n'
+    fi
+  elif [ "$1" == "uninstall" ]
   then
-    cat /usr/gsh/messages/help/factorio-help.txt
+    bash /usr/gsh/script-files/uninstall
+  elif [ "$1" == "--help" ]
+  then
+    cat /usr/gsh/messages/help/help.txt
     printf '\n'
-  elif [ "$2" == "" ]
+  elif [ "$1" == "" ]
   then
-    cat /usr/gsh/messages/help/factorio-help.txt
-    printf '\n'
-  fi
-elif [ "$1" == "satisfactory" ]
-then
-  if [ "$2" == "up" ]
-  then
-    docker compose -f /usr/gsh/docker/satisfactory/docker-compose.yml up -d
-  elif [ "$2" == "down" ]
-  then
-    docker compose -f /usr/gsh/docker/satisfactory/docker-compose.yml down
-  elif [ "$2" == "logs" ]
-  then
-    docker compose -f /usr/gsh/docker/satisfactory/docker-compose.yml logs
-  elif [ "$2" == "pull" ]
-  then
-    docker compose -f /usr/gsh/docker/satisfactory/docker-compose.yml pull
-  elif [ "$2" == "tail-logs" ]
-  then
-    docker compose -f /usr/gsh/docker/satisfactory/docker-compose.yml logs -f
-  elif [ "$2" == "--help" ]
-  then
-    cat /usr/gsh/messages/help/satisfactory-help.txt
-    printf '\n'
-  elif [ "$2" == "" ]
-  then
-    cat /usr/gsh/messages/help/satisfactory-help.txt
-    printf '\n'
-  fi
-elif [ "$1" == "veloren" ]
-then
-  if [ "$2" == "up" ]
-  then
-    docker compose -f /usr/gsh/docker/veloren/docker-compose.yml up -d
-  elif [ "$2" == "down" ]
-  then
-    docker compose -f /usr/gsh/docker/veloren/docker-compose.yml down
-  elif [ "$2" == "logs" ]
-  then
-    docker compose -f /usr/gsh/docker/veloren/docker-compose.yml logs
-  elif [ "$2" == "pull" ]
-  then
-    docker compose -f /usr/gsh/docker/veloren/docker-compose.yml pull
-  elif [ "$2" == "tail-logs" ]
-  then
-    docker compose -f /usr/gsh/docker/veloren/docker-compose.yml logs -f
-  elif [ "$2" == "--help" ]
-  then
-    cat /usr/gsh/messages/help/veloren-help.txt
-    printf '\n'
-  elif [ "$2" == "" ]
-  then
-    cat /usr/gsh/messages/help/veloren-help.txt
-    printf '\n'
-  fi
-elif [ "$1" == "minecraft" ]
-then
-  if [ "$2" == "up" ]
-  then
-    docker compose -f /usr/gsh/docker/minecraft/docker-compose.yml up -d
-  elif [ "$2" == "down" ]
-  then
-    docker compose -f /usr/gsh/docker/minecraft/docker-compose.yml down
-  elif [ "$2" == "logs" ]
-  then
-    docker compose -f /usr/gsh/docker/minecraft/docker-compose.yml logs
-  elif [ "$2" == "pull" ]
-  then
-    docker compose -f /usr/gsh/docker/minecraft/docker-compose.yml pull
-  elif [ "$2" == "tail-logs" ]
-  then
-    docker compose -f /usr/gsh/docker/minecraft/docker-compose.yml logs -f
-  elif [ "$2" == "--help" ]
-  then
-    cat /usr/gsh/messages/help/minecraft-help.txt
-    printf '\n'
-  elif [ "$2" == "" ]
-  then
-    cat /usr/gsh/messages/help/minecraft-help.txt
+    cat /usr/gsh/messages/help/help.txt
     printf '\n'
   fi
-elif [ "$1" == "uninstall" ]
-then
-  bash /usr/gsh/script-files/uninstall
-elif [ "$1" == "--help" ]
-then
-  cat /usr/gsh/messages/help/help.txt
-  printf '\n'
-elif [ "$1" == "" ]
-then
-  cat /usr/gsh/messages/help/help.txt
-  printf '\n'
-fi
 
-source /usr/gsh/environment/donation-ticker.env
-source /usr/gsh/environment/donation-ctrl.env
+  source /usr/gsh/environment/donation-ticker.env
+  source /usr/gsh/environment/donation-ctrl.env
 
-if [ "$donationmessage" -eq 0 ]
-then
-  if (( dt % 3 == 0 && dt % 10 == 0 ))
+  if [ "$donationmessage" -eq 0 ]
   then
-    echo "Thank you for using 'Game Server Helper'. If you have found it helpful and would like to support the project, and others, please head on over to my KoFi: 'https://ko-fi.com/lollypopstealer'. Any support you can show would be greatly appreciated. Thank you again for using 'Game Server Helper'."
+    if (( dt % 3 == 0 && dt % 10 == 0 ))
+    then
+      echo "Thank you for using 'Game Server Helper'. If you have found it helpful and would like to support the project, and others, please head on over to my KoFi: 'https://ko-fi.com/lollypopstealer'. Any support you can show would be greatly appreciated. Thank you again for using 'Game Server Helper'."
+    fi
+    dt=$(( $dt + 1 ))
+    echo "dt=$dt" 2>/dev/null 1> /tmp/donation-ticker.env
+    sudo cp /tmp/donation-ticker.env /usr/gsh/environment/donation-ticker.env
   fi
-  dt=$(( $dt + 1 ))
-  echo "dt=$dt" 2>/dev/null 1> /usr/gsh/environment/donation-ticker.env
+else
+  if [ "$1" == "factorio" ]
+  then
+    if [ "$2" == "up" ]
+    then
+      docker compose -f /usr/gsh/docker/factorio/docker-compose.yml up -d
+    elif [ "$2" == "down" ]
+    then
+      if [ "$3" == "--now" ]
+      then
+        docker compose -f /usr/gsh/docker/factorio/docker-compose.yml down
+      else
+        x=$(($(cat /usr/gsh/docker/factorio/config/server-settings.json | grep autosave_interval | awk 'FNR==2{print$0}' | colrm 1 23 | colrm 3)*60))
+        while [ $x -ge 0 ]
+        do
+          if [ $x -gt 0 ]
+          then
+            clear
+            printf '%dh:%dm:%ds\n' $(($x/3600)) $(($x%3600/60)) $(($x%60))
+            x=$((x-1))
+            sleep 0.999999999999
+          else
+            docker compose -f /usr/gsh/docker/factorio/docker-compose.yml down
+            break
+          fi
+        done
+      fi
+    elif [ "$2" == "logs" ]
+    then
+      docker compose -f /usr/gsh/docker/factorio/docker-compose.yml logs
+    elif [ "$2" == "pull" ]
+    then
+      docker compose -f /usr/gsh/docker/factorio/docker-compose.yml pull
+    elif [ "$2" == "tail-logs" ]
+    then
+      docker compose -f /usr/gsh/docker/factorio/docker-compose.yml logs -f
+    elif [ "$2" == "--help" ]
+    then
+      cat /usr/gsh/messages/help/factorio-help.txt
+      printf '\n'
+    elif [ "$2" == "" ]
+    then
+      cat /usr/gsh/messages/help/factorio-help.txt
+      printf '\n'
+    fi
+  elif [ "$1" == "satisfactory" ]
+  then
+    if [ "$2" == "up" ]
+    then
+      docker compose -f /usr/gsh/docker/satisfactory/docker-compose.yml up -d
+    elif [ "$2" == "down" ]
+    then
+      docker compose -f /usr/gsh/docker/satisfactory/docker-compose.yml down
+    elif [ "$2" == "logs" ]
+    then
+      docker compose -f /usr/gsh/docker/satisfactory/docker-compose.yml logs
+    elif [ "$2" == "pull" ]
+    then
+      docker compose -f /usr/gsh/docker/satisfactory/docker-compose.yml pull
+    elif [ "$2" == "tail-logs" ]
+    then
+      docker compose -f /usr/gsh/docker/satisfactory/docker-compose.yml logs -f
+    elif [ "$2" == "--help" ]
+    then
+      cat /usr/gsh/messages/help/satisfactory-help.txt
+      printf '\n'
+    elif [ "$2" == "" ]
+    then
+      cat /usr/gsh/messages/help/satisfactory-help.txt
+      printf '\n'
+    fi
+  elif [ "$1" == "veloren" ]
+  then
+    if [ "$2" == "up" ]
+    then
+      docker compose -f /usr/gsh/docker/veloren/docker-compose.yml up -d
+    elif [ "$2" == "down" ]
+    then
+      docker compose -f /usr/gsh/docker/veloren/docker-compose.yml down
+    elif [ "$2" == "logs" ]
+    then
+      docker compose -f /usr/gsh/docker/veloren/docker-compose.yml logs
+    elif [ "$2" == "pull" ]
+    then
+      docker compose -f /usr/gsh/docker/veloren/docker-compose.yml pull
+    elif [ "$2" == "tail-logs" ]
+    then
+      docker compose -f /usr/gsh/docker/veloren/docker-compose.yml logs -f
+    elif [ "$2" == "--help" ]
+    then
+      cat /usr/gsh/messages/help/veloren-help.txt
+      printf '\n'
+    elif [ "$2" == "" ]
+    then
+      cat /usr/gsh/messages/help/veloren-help.txt
+      printf '\n'
+    fi
+  elif [ "$1" == "minecraft" ]
+  then
+    if [ "$2" == "up" ]
+    then
+      docker compose -f /usr/gsh/docker/minecraft/docker-compose.yml up -d
+    elif [ "$2" == "down" ]
+    then
+      docker compose -f /usr/gsh/docker/minecraft/docker-compose.yml down
+    elif [ "$2" == "logs" ]
+    then
+      docker compose -f /usr/gsh/docker/minecraft/docker-compose.yml logs
+    elif [ "$2" == "pull" ]
+    then
+      docker compose -f /usr/gsh/docker/minecraft/docker-compose.yml pull
+    elif [ "$2" == "tail-logs" ]
+    then
+      docker compose -f /usr/gsh/docker/minecraft/docker-compose.yml logs -f
+    elif [ "$2" == "--help" ]
+    then
+      cat /usr/gsh/messages/help/minecraft-help.txt
+      printf '\n'
+    elif [ "$2" == "" ]
+    then
+      cat /usr/gsh/messages/help/minecraft-help.txt
+      printf '\n'
+    fi
+  elif [ "$1" == "uninstall" ]
+  then
+    bash /usr/gsh/script-files/uninstall
+  elif [ "$1" == "--help" ]
+  then
+    cat /usr/gsh/messages/help/help.txt
+    printf '\n'
+  elif [ "$1" == "" ]
+  then
+    cat /usr/gsh/messages/help/help.txt
+    printf '\n'
+  fi
+
+  source /usr/gsh/environment/donation-ticker.env
+  source /usr/gsh/environment/donation-ctrl.env
+
+  if [ "$donationmessage" -eq 0 ]
+  then
+    if (( dt % 3 == 0 && dt % 10 == 0 ))
+    then
+      echo "Thank you for using 'Game Server Helper'. If you have found it helpful and would like to support the project, and others, please head on over to my KoFi: 'https://ko-fi.com/lollypopstealer'. Any support you can show would be greatly appreciated. Thank you again for using 'Game Server Helper'."
+    fi
+    dt=$(( $dt + 1 ))
+    echo "dt=$dt" > /tmp/gsh/donation-ticker.env
+    cp /tmp/gsh/donation-ticker.env /usr/gsh/environment/donation-ticker.env
+  fi
 fi
