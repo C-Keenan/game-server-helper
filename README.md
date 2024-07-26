@@ -1,5 +1,19 @@
 # Game Server Helper
 
+## Announcements
+
+### Announcement 07/26/2024
+
+- Working on an idea to run a postgresql database, or potentially nosql/sqlite, as I would prefer not having to run sudo in the main script for the donation ticker. Donation message will not be moving to sql database and database will NOT be getting synced with anything outside of your local network if/when implemented.
+
+- Potential use cases for the database are, currently, as follows
+
+    1. Non-'sudo' implementation of donation-ticker to show a donation reminder message when you've run the 'command' if '$dt' equals '30'
+
+    1. User logging to show when a user runs the command and what game or service they interacted with so server admins can facilitate support to users
+
+- No other ideas are currently in the works but I will keep this announcement section up to date with progress. If you have any suggestions or ideas please don't hesitate to contact me at dev+gsh-feature-requests@lollypopstealer.com as I don't really go on github unless I'm merging the 'nightly' branch to the main branch.
+
 ## Release Notes
 
 ### Release 07/25/2024
