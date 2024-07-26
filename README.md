@@ -6,7 +6,7 @@
 
 - Added a donation reminder statement to the main 'gsh' function. You can disable it by editing the "/usr/gsh/environment/donation-ctrl.env" file and setting the "$donationmessage" variable to '1'. This file will never be overwritten as it is created at install or at the latest update.
 
-- Docker container environment files will no longer be overwritten either as they are made and set at install/update if they do not exist, hopefully this saves you the frustration of needing to reset you minecraft rcon password every time there is an update. Apologies for the frustrations.
+- Docker container environment files will no longer be overwritten either as they are made and set at install/update if they do not exist, hopefully this saves you the frustration of needing to reset your minecraft rcon password every time there is an update. Apologies for the frustrations.
 
 ### Release 07/21/2024 P2
 
