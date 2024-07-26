@@ -252,51 +252,51 @@ then
             then
                 sudo mkdir -p /usr/gsh/environment
                 sudo touch /usr/gsh/environment/donation-ticker.env
-                echo "dt=0" >> /usr/gsh/environment/donation-ticker.env
+                sudo echo "dt=0" >> /usr/gsh/environment/donation-ticker.env
                 sudo touch /usr/gsh/environment/donation-ctrl.env
-                echo "donationmessage=0" >> /usr/gsh/environment/donation-ctrl.env
+                sudo echo "donationmessage=0" >> /usr/gsh/environment/donation-ctrl.env
             fi
             if ! [ -f /usr/gsh/docker/factorio/factorio.env ]
             then
                 sudo touch /usr/gsh/docker/factorio/factorio.env
-                echo "UPDATE_MODS_ON_START=true" > /usr/gsh/docker/factorio/factorio.env
+                sudo echo "UPDATE_MODS_ON_START=true" > /usr/gsh/docker/factorio/factorio.env
             fi
             if ! [ -f /usr/gsh/docker/satisfactory/satisfactory.env ]
             then
                 sudo touch /usr/gsh/docker/satisfactory/satisfactory.env
-                echo "AUTOPAUSE=false" > /usr/gsh/docker/satisfactory/satisfactory.env
-                echo "AUTOSAVEINTERVAL=600" >> /usr/gsh/docker/satisfactory/satisfactory.env
-                echo "AUTOSAVENUM=2" >> /usr/gsh/docker/satisfactory/satisfactory.env
-                echo "AUTOSAVEONDISCONNECT=true" >> /usr/gsh/docker/satisfactory/satisfactory.env
-                echo "CRASHREPORT=true" >> /usr/gsh/docker/satisfactory/satisfactory.env
-                echo "DEBUG=false" >> /usr/gsh/docker/satisfactory/satisfactory.env
-                echo "DISABLESEASONALEVENTS=false" >> /usr/gsh/docker/satisfactory/satisfactory.env
-                echo "MAXPLAYERS=4" >> /usr/gsh/docker/satisfactory/satisfactory.env
-                echo "MAXOBJECTS=2162688 #this is currently the default value for Satisfactory as shipped" >> /usr/gsh/docker/satisfactory/satisfactory.env
-                echo "MAXTICKRATE=30" >> /usr/gsh/docker/satisfactory/satisfactory.env
-                echo "NETWORKQUALITY=3" >> /usr/gsh/docker/satisfactory/satisfactory.env
-                echo "PGID=1001" >> /usr/gsh/docker/satisfactory/satisfactory.env
-                echo "PUID=1001" >> /usr/gsh/docker/satisfactory/satisfactory.env
-                echo "ROOTLESS=false" >> /usr/gsh/docker/satisfactory/satisfactory.env
-                echo "SERVERBEACONPORT=15000" >> /usr/gsh/docker/satisfactory/satisfactory.env
-                echo "SERVERGAMEPORT=7777" >> /usr/gsh/docker/satisfactory/satisfactory.env
-                echo "SERVERIP=0.0.0.0" >> /usr/gsh/docker/satisfactory/satisfactory.env
-                echo "SERVERQUERYPORT=15777" >> /usr/gsh/docker/satisfactory/satisfactory.env
-                echo "SERVERSTREAMING=true" >> /usr/gsh/docker/satisfactory/satisfactory.env
-                echo "STEAMBETA=true" >> /usr/gsh/docker/satisfactory/satisfactory.env
-                echo "SKIPUPDATE=true" >> /usr/gsh/docker/satisfactory/satisfactory.env
-                echo "TIMEOUT=30" >> /usr/gsh/docker/satisfactory/satisfactory.env
+                sudo echo "AUTOPAUSE=false" > /usr/gsh/docker/satisfactory/satisfactory.env
+                sudo echo "AUTOSAVEINTERVAL=600" >> /usr/gsh/docker/satisfactory/satisfactory.env
+                sudo echo "AUTOSAVENUM=2" >> /usr/gsh/docker/satisfactory/satisfactory.env
+                sudo echo "AUTOSAVEONDISCONNECT=true" >> /usr/gsh/docker/satisfactory/satisfactory.env
+                sudo echo "CRASHREPORT=true" >> /usr/gsh/docker/satisfactory/satisfactory.env
+                sudo echo "DEBUG=false" >> /usr/gsh/docker/satisfactory/satisfactory.env
+                sudo echo "DISABLESEASONALEVENTS=false" >> /usr/gsh/docker/satisfactory/satisfactory.env
+                sudo echo "MAXPLAYERS=4" >> /usr/gsh/docker/satisfactory/satisfactory.env
+                sudo echo "MAXOBJECTS=2162688 #this is currently the default value for Satisfactory as shipped" >> /usr/gsh/docker/satisfactory/satisfactory.env
+                sudo echo "MAXTICKRATE=30" >> /usr/gsh/docker/satisfactory/satisfactory.env
+                sudo echo "NETWORKQUALITY=3" >> /usr/gsh/docker/satisfactory/satisfactory.env
+                sudo echo "PGID=1001" >> /usr/gsh/docker/satisfactory/satisfactory.env
+                sudo echo "PUID=1001" >> /usr/gsh/docker/satisfactory/satisfactory.env
+                sudo echo "ROOTLESS=false" >> /usr/gsh/docker/satisfactory/satisfactory.env
+                sudo echo "SERVERBEACONPORT=15000" >> /usr/gsh/docker/satisfactory/satisfactory.env
+                sudo echo "SERVERGAMEPORT=7777" >> /usr/gsh/docker/satisfactory/satisfactory.env
+                sudo echo "SERVERIP=0.0.0.0" >> /usr/gsh/docker/satisfactory/satisfactory.env
+                sudo echo "SERVERQUERYPORT=15777" >> /usr/gsh/docker/satisfactory/satisfactory.env
+                sudo echo "SERVERSTREAMING=true" >> /usr/gsh/docker/satisfactory/satisfactory.env
+                sudo echo "STEAMBETA=true" >> /usr/gsh/docker/satisfactory/satisfactory.env
+                sudo echo "SKIPUPDATE=true" >> /usr/gsh/docker/satisfactory/satisfactory.env
+                sudo echo "TIMEOUT=30" >> /usr/gsh/docker/satisfactory/satisfactory.env
             fi
             if ! [ -f /usr/gsh/docker/minecraft/minecraft.env ]
             then
                 sudo touch /usr/gsh/docker/minecraft/minecraft.env
-                echo "EULA=TRUE" > /usr/gsh/docker/minecraft/minecraft.env
-                echo "#RCON_PASSWORD=<YOUR_RCON_PASSWORD_HERE>" > /usr/gsh/docker/minecraft/minecraft.env
+                sudo echo "EULA=TRUE" > /usr/gsh/docker/minecraft/minecraft.env
+                sudo echo "#RCON_PASSWORD=<YOUR_RCON_PASSWORD_HERE>" > /usr/gsh/docker/minecraft/minecraft.env
             fi
             if ! [ -f /usr/gsh/docker/veloren/veloren.env ]
             then
                 sudo touch /usr/gsh/docker/veloren/veloren.env
-                echo "RUST_LOG=debug,common::net=info" > /usr/gsh/docker/veloren/veloren.env
+                sudo echo "RUST_LOG=debug,common::net=info" > /usr/gsh/docker/veloren/veloren.env
             fi
             echo "$asciilogo"
             printf '\n'
