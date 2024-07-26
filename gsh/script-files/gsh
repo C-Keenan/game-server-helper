@@ -134,3 +134,16 @@ then
   cat /usr/gsh/messages/help/help.txt
   printf '\n'
 fi
+
+source /usr/gsh/environment/donation-ticker.env
+source /usr/gsh/environment/donation-ctrl.env
+
+if [ $donationmessage -eq 0 ]
+then
+  if (( dt % 3 == 0 && dt % 10 == 0 ))
+  then
+    echo "Thank you for using 'Game Server Helper'. If you have found it helpful and would like to support the project, and others, please head on over to my KoFi: 'https://ko-fi.com/lollypopstealer'. Any support you can show would be greatly appreciated. Thank you again for using 'Game Server Helper'."
+  fi
+  dt=$(( $dt + 1 ))
+  echo "dt=$dt" 2>/dev/null 1> /usr/gsh/environment/donation-ticker.env
+fi
