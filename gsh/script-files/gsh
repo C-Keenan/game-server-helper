@@ -285,10 +285,8 @@ else
     cat /usr/gsh/messages/help/help.txt
     printf '\n'
   fi
-
   source /usr/gsh/environment/donation-ticker.env
   source /usr/gsh/environment/donation-ctrl.env
-
   if [ "$donationmessage" -eq 0 ]
   then
     if (( dt % 3 == 0 && dt % 10 == 0 ))
