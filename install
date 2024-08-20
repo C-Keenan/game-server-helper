@@ -50,7 +50,7 @@ then
                     echo "Colrm utility not detected."
                     echo "Please wait patiently for installation to finish."
                     sleep 10
-                    apt-get install -y util-linux 2>/dev/null 1>/dev/null
+                    apt-get install -y bsdutils bsdmainutils bsdextrautils 2>/dev/null 1>/dev/null
                     echo "Installation of util-linux(contains colrm utility) finished."
                 fi
             elif ! [ -d /usr/gsh ]
@@ -173,7 +173,7 @@ then
                     echo "Colrm utility not detected."
                     echo "Please wait patiently for installation to finish."
                     sleep 10
-                    sudo apt-get install -y util-linux 2>/dev/null 1>/dev/null
+                    sudo apt-get install -y bsdutils bsdmainutils bsdextrautils 2>/dev/null 1>/dev/null
                     echo "Installation of util-linux(contains colrm utility) finished."
                 fi
             elif ! [ -d /usr/gsh ]
@@ -298,7 +298,7 @@ then
                 echo "Colrm utility not detected."
                 echo "Please wait patiently for installation to finish."
                 sleep 10
-                apt-get install -y util-linux 2>/dev/null 1>/dev/null
+                apt-get install -y bsdutils bsdmainutils bsdextrautils 2>/dev/null 1>/dev/null
             fi
         elif ! [ -d /usr/gsh ]
         then
