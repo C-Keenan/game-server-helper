@@ -1,4 +1,4 @@
-Usage:  gsh veloren COMMAND
+Usage:  gsh minecraft COMMAND
 
 Commands:
   up           Brings local minecraft docker instance up using 'Docker Compose'
