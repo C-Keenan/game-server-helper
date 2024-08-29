@@ -14,6 +14,60 @@ then
         then
             if [ -d /usr/gsh ]
             then
+                if [ -f /usr/bin/docker ]
+                then
+                    echo "Docker detected. Not installing Docker and Docker Compose."
+                elif ! [ -f /usr/bin/docker ]
+                then
+                    echo "Docker not detected."
+                    echo "Please wait patiently for installation to finish."
+                    sleep 10
+                    bash add-docker-repo-nosudo 2>/dev/null 1>/dev/null
+                    apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin 2>/dev/null 1>/dev/null
+                    echo "Would you like to make sure the docker system installed properly by running 'docker run hello-world'? yes/no"
+                    read rsp3
+                    rsp3=$(echo $rsp3 | awk '{print tolower($0)}')
+                    if [ $rsp3 == 'yes' ]
+                    then
+                        docker run hello-world
+                    elif [ $rsp3 == 'no' ]
+                    then
+                        echo "Understood."
+                    fi
+                fi
+                if [ -f /usr/bin/colrm ]
+                then
+                    echo "Colrm utility already installed. Skipping step."
+                elif ! [ -f /usr/bin/colrm ]
+                then
+                    echo "Colrm utility not detected."
+                    echo "Please wait patiently for installation to finish."
+                    sleep 10
+                    apt-get install -y bsdutils bsdmainutils bsdextrautils 2>/dev/null 1>/dev/null
+                    echo "Installation of bsdutils bsdmainutils bsdextrautils (contains colrm utility) finished."
+                fi
+                if [ -f /usr/bin/jq ]
+                then
+                    echo "JQUERY already installed skipping."
+                elif ! [ -f /usr/bin/jq ]
+                then
+                    echo "JQUERY not detected"
+                    echo "Please wait patiently for installation to finish."
+                    sleep 10
+                    apt-get install -y jq
+                    echo "Installation of jq finished."
+                fi
+                if [ -f /usr/bin/setfacl ]
+                then
+                    echo "acl already installed skipping."
+                elif ! [ -f /usr/bin/setfacl ]
+                then
+                    echo "acl not detected"
+                    echo "Please wait patiently for installation to finish."
+                    sleep 10
+                    apt-get install -y acl
+                    echo "Installation of acl finished."
+                fi
                 als=$(cat /${HOME}/.bashrc | grep gsh)
                 if [ "$als" == "" ]
                 then
@@ -41,6 +95,8 @@ then
                 else
                     cp -r ./gsh /usr
                 fi
+            elif ! [ -d /usr/gsh ]
+            then
                 if [ -f /usr/bin/docker ]
                 then
                     echo "Docker detected. Not installing Docker and Docker Compose."
@@ -84,57 +140,44 @@ then
                     apt-get install -y jq
                     echo "Installation of jq finished."
                 fi
-            elif ! [ -d /usr/gsh ]
-            then
+                if [ -f /usr/bin/setfacl ]
+                then
+                    echo "acl already installed skipping."
+                elif ! [ -f /usr/bin/setfacl ]
+                then
+                    echo "acl not detected"
+                    echo "Please wait patiently for installation to finish."
+                    sleep 10
+                    apt-get install -y acl
+                    echo "Installation of acl finished."
+                fi
                 mkdir -p /usr/gsh
                 als=$(cat /${HOME}/.bashrc | grep gsh)
                 if [ "$als" == "" ]
                 then
                     echo "alias gsh='bash /usr/gsh/script-files/gsh'" >> ~/.bashrc
                 fi
-                cp -r ./gsh /usr 2>/dev/null
-                if [ -f /usr/bin/docker ]
+                echo "Do you have a tar archive from a previous install?(y/N)"
+                read ans
+                ans="${ans:-n}"
+                ans=$(echo $ans | awk '{print tolower($0)}')
+                if [ "$ans" == "y" ]
                 then
-                    echo "Docker detected. Not installing Docker and Docker Compose."
-                elif ! [ -f /usr/bin/docker ]
-                then
-                    echo "Docker not detected."
-                    echo "Please wait patiently for installation to finish."
-                    sleep 10
-                    bash add-docker-repo-nosudo 2>/dev/null 1>/dev/null
-                    apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin 2>/dev/null 1>/dev/null
-                    echo "Would you like to make sure the docker system installed properly by running 'docker run hello-world'? yes/no"
-                    read rsp3
-                    rsp3=$(echo $rsp3 | awk '{print tolower($0)}')
-                    if [ $rsp3 == 'yes' ]
+                    echo "What is the full file path of the tar archive?(/path/to/archive/gsh-docker-archive.tar.gz)"
+                    read filepath
+                    tar -xzf $filepath /
+                    ec=$?
+                    if [ $ec -eq 0 ]
                     then
-                        docker run hello-world
-                    elif [ $rsp3 == 'no' ]
-                    then
-                        echo "Understood."
+                        echo "Extracted contents if gsh-docker-archive.tar.gz successfully. Moving to next step."
+                    else
+                        echo "Failed to properly extract archive contents! Exiting..."
+                        exit 1
                     fi
-                fi
-                if [ -f /usr/bin/colrm ]
-                then
-                    echo "Colrm utility already installed. Skipping step."
-                elif ! [ -f /usr/bin/colrm ]
-                then
-                    echo "Colrm utility not detected."
-                    echo "Please wait patiently for installation to finish."
-                    sleep 10
-                    apt-get install -y bsdutils bsdmainutils bsdextrautils 2>/dev/null 1>/dev/null
-                    echo "Installation of bsdutils bsdmainutils bsdextrautils (contains colrm utility) finished."
-                fi
-                if [ -f /usr/bin/jq ]
-                then
-                    echo "JQUERY already installed skipping."
-                elif ! [ -f /usr/bin/jq ]
-                then
-                    echo "JQUERY not detected"
-                    echo "Please wait patiently for installation to finish."
-                    sleep 10
-                    apt-get install -y jq
-                    echo "Installation of jq finished."
+                    cp -r ./gsh/messages /usr/gsh
+                    cp -r ./gsh/script-files /usr/gsh
+                else
+                    cp -r ./gsh /usr
                 fi
             fi
             if ! [ -d /usr/gsh/environment ]
@@ -142,6 +185,7 @@ then
                 mkdir -p /usr/gsh/environment
                 cp ./examples/donation-ctrl.env /usr/gsh/environment/donation-ctrl.env
                 cp ./examples/donation-ticker.env /usr/gsh/environment/donation-ticker.env
+                setfacl -m u:${USER}:rw /usr/gsh/environment/donation-ticker.env
             fi
             if ! [ -f /usr/gsh/docker/factorio/factorio.env ]
             then
@@ -178,6 +222,62 @@ then
         then
             if [ -d /usr/gsh ]
             then
+                if [ -f /usr/bin/docker ]
+                then
+                    echo "Docker detected. Not installing Docker and Docker Compose."
+                    sudo usermod -aG docker ${USER}
+                elif ! [ -f /usr/bin/docker ]
+                then
+                    echo "Docker not detected."
+                    echo "Please wait patiently for installation to finish."
+                    sleep 10
+                    bash add-docker-repo 2>/dev/null 1>/dev/null
+                    sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin 2>/dev/null 1>/dev/null
+                    sudo usermod -aG docker ${USER}
+                    echo "Would you like to make sure the docker system installed properly by running 'docker run hello-world'? yes/no"
+                    read rsp3
+                    rsp3=$(echo $rsp3 | awk '{print tolower($0)}')
+                    if [ $rsp3 == 'yes' ]
+                    then
+                        sudo docker run hello-world
+                    elif [ $rsp3 == 'no' ]
+                    then
+                        echo "Understood."
+                    fi
+                fi
+                if [ -f /usr/bin/colrm ]
+                then
+                    echo "Colrm utility already installed. Skipping step."
+                elif ! [ -f /usr/bin/colrm ]
+                then
+                    echo "Colrm utility not detected."
+                    echo "Please wait patiently for installation to finish."
+                    sleep 10
+                    sudo apt-get install -y bsdutils bsdmainutils bsdextrautils 2>/dev/null 1>/dev/null
+                    echo "Installation of bsdutils bsdmainutils bsdextrautils (contains colrm utility) finished."
+                fi
+                if [ -f /usr/bin/jq ]
+                then
+                    echo "JQUERY already installed skipping."
+                elif ! [ -f /usr/bin/jq ]
+                then
+                    echo "JQUERY not detected"
+                    echo "Please wait patiently for installation to finish."
+                    sleep 10
+                    sudo apt-get install -y jq
+                    echo "Installation of jq finished."
+                fi
+                if [ -f /usr/bin/setfacl ]
+                then
+                    echo "acl already installed skipping."
+                elif ! [ -f /usr/bin/setfacl ]
+                then
+                    echo "acl not detected"
+                    echo "Please wait patiently for installation to finish."
+                    sleep 10
+                    sudo apt-get install -y acl
+                    echo "Installation of acl finished."
+                fi
                 als=$(cat /${HOME}/.bashrc | grep gsh)
                 if [ "$als" == "" ]
                 then
@@ -205,6 +305,8 @@ then
                 else
                     sudo cp -r ./gsh /usr
                 fi
+            elif ! [ -d /usr/gsh ]
+            then
                 if [ -f /usr/bin/docker ]
                 then
                     echo "Docker detected. Not installing Docker and Docker Compose."
@@ -247,62 +349,47 @@ then
                     echo "JQUERY not detected"
                     echo "Please wait patiently for installation to finish."
                     sleep 10
-                    apt-get install -y jq
+                    sudo apt-get install -y jq
                     echo "Installation of jq finished."
                 fi
-            elif ! [ -d /usr/gsh ]
-            then
+                if [ -f /usr/bin/setfacl ]
+                then
+                    echo "acl already installed skipping."
+                elif ! [ -f /usr/bin/setfacl ]
+                then
+                    echo "acl not detected"
+                    echo "Please wait patiently for installation to finish."
+                    sleep 10
+                    sudo apt-get install -y acl
+                    echo "Installation of acl finished."
+                fi
                 sudo mkdir -p /usr/gsh
                 als=$(cat /${HOME}/.bashrc | grep gsh)
                 if [ "$als" == "" ]
                 then
                     sudo echo "alias gsh='bash /usr/gsh/script-files/gsh'" >> ~/.bashrc
                 fi
-                sudo cp -r ./gsh /usr 2>/dev/null
-                if [ -f /usr/bin/docker ]
+                echo "Do you have a tar archive from a previous install?(y/N)"
+                read ans
+                ans="${ans:-n}"
+                ans=$(echo $ans | awk '{print tolower($0)}')
+                if [ "$ans" == "y" ]
                 then
-                    echo "Docker detected. Not installing Docker and Docker Compose."
-                    sudo usermod -aG docker ${USER}
-                elif ! [ -f /usr/bin/docker ]
-                then
-                    echo "Docker not detected."
-                    echo "Please wait patiently for installation to finish."
-                    sleep 10
-                    bash add-docker-repo 2>/dev/null 1>/dev/null
-                    sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin 2>/dev/null 1>/dev/null
-                    sudo usermod -aG docker ${USER}
-                    echo "Would you like to make sure the docker system installed properly by running 'docker run hello-world'? yes/no"
-                    read rsp3
-                    rsp3=$(echo $rsp3 | awk '{print tolower($0)}')
-                    if [ $rsp3 == 'yes' ]
+                    echo "What is the full file path of the tar archive?(/path/to/archive/gsh-docker-archive.tar.gz)"
+                    read filepath
+                    sudo tar -xzf $filepath /
+                    ec=$?
+                    if [ $ec -eq 0 ]
                     then
-                        sudo docker run hello-world
-                    elif [ $rsp3 == 'no' ]
-                    then
-                        echo "Understood."
+                        echo "Extracted contents if gsh-docker-archive.tar.gz successfully. Moving to next step."
+                    else
+                        echo "Failed to properly extract archive contents! Exiting..."
+                        exit 1
                     fi
-                fi
-                if [ -f /usr/bin/colrm ]
-                then
-                    echo "Colrm utility already installed. Skipping step."
-                elif ! [ -f /usr/bin/colrm ]
-                then
-                    echo "Colrm utility not detected."
-                    echo "Please wait patiently for installation to finish."
-                    sleep 10
-                    sudo apt-get install -y bsdutils bsdmainutils bsdextrautils 2>/dev/null 1>/dev/null
-                    echo "Installation of bsdutils bsdmainutils bsdextrautils (contains colrm utility) finished."
-                fi
-                if [ -f /usr/bin/jq ]
-                then
-                    echo "JQUERY already installed skipping."
-                elif ! [ -f /usr/bin/jq ]
-                then
-                    echo "JQUERY not detected"
-                    echo "Please wait patiently for installation to finish."
-                    sleep 10
-                    apt-get install -y jq
-                    echo "Installation of jq finished."
+                    sudo cp -r ./gsh/messages /usr/gsh
+                    sudo cp -r ./gsh/script-files /usr/gsh
+                else
+                    sudo cp -r ./gsh /usr
                 fi
             fi
             if ! [ -d /usr/gsh/environment ]
@@ -310,6 +397,7 @@ then
                 sudo mkdir -p /usr/gsh/environment
                 sudo cp ./examples/donation-ctrl.env /usr/gsh/environment/donation-ctrl.env
                 sudo cp ./examples/donation-ticker.env /usr/gsh/environment/donation-ticker.env
+                sudo setfacl -m u:${USER}:rw /usr/gsh/environment/donation-ticker.env
             fi
             if ! [ -f /usr/gsh/docker/factorio/factorio.env ]
             then
@@ -347,33 +435,6 @@ then
     then
         if [ -d /usr/gsh ]
         then
-            als=$(cat /${HOME}/.bashrc | grep gsh)
-            if [ "$als" == "" ]
-            then
-                echo "alias gsh='bash /usr/gsh/script-files/gsh'" >> ~/.bashrc
-            fi
-            echo "Do you have a tar archive from a previous install?(y/N)"
-            read ans
-            ans="${ans:-n}"
-            ans=$(echo $ans | awk '{print tolower($0)}')
-            if [ "$ans" == "y" ]
-            then
-                echo "What is the full file path of the tar archive?(/path/to/archive/gsh-docker-archive.tar.gz)"
-                read filepath
-                tar -xzf $filepath /
-                ec=$?
-                if [ $ec -eq 0 ]
-                then
-                    echo "Extracted contents if gsh-docker-archive.tar.gz successfully. Moving to next step."
-                else
-                    echo "Failed to properly extract archive contents! Exiting..."
-                    exit 1
-                fi
-                cp -r ./gsh/messages /usr/gsh
-                cp -r ./gsh/script-files /usr/gsh
-            else
-                cp -r ./gsh /usr
-            fi
             if [ -f /usr/bin/docker ]
             then
                 echo "Docker detected. Not installing Docker and Docker Compose."
@@ -418,15 +479,46 @@ then
                 apt-get install -y jq
                 echo "Installation of jq finished."
             fi
-        elif ! [ -d /usr/gsh ]
-        then
-            mkdir -p /usr/gsh
+            if [ -f /usr/bin/setfacl ]
+            then
+                echo "acl already installed skipping."
+            elif ! [ -f /usr/bin/setfacl ]
+            then
+                echo "acl not detected"
+                echo "Please wait patiently for installation to finish."
+                sleep 10
+                apt-get install -y acl
+                echo "Installation of acl finished."
+            fi
             als=$(cat /${HOME}/.bashrc | grep gsh)
             if [ "$als" == "" ]
             then
                 echo "alias gsh='bash /usr/gsh/script-files/gsh'" >> ~/.bashrc
             fi
-            cp -r ./gsh /usr 2>/dev/null
+            echo "Do you have a tar archive from a previous install?(y/N)"
+            read ans
+            ans="${ans:-n}"
+            ans=$(echo $ans | awk '{print tolower($0)}')
+            if [ "$ans" == "y" ]
+            then
+                echo "What is the full file path of the tar archive?(/path/to/archive/gsh-docker-archive.tar.gz)"
+                read filepath
+                tar -xzf $filepath /
+                ec=$?
+                if [ $ec -eq 0 ]
+                then
+                    echo "Extracted contents if gsh-docker-archive.tar.gz successfully. Moving to next step."
+                else
+                    echo "Failed to properly extract archive contents! Exiting..."
+                    exit 1
+                fi
+                cp -r ./gsh/messages /usr/gsh
+                cp -r ./gsh/script-files /usr/gsh
+            else
+                cp -r ./gsh /usr
+            fi
+        elif ! [ -d /usr/gsh ]
+        then
             if [ -f /usr/bin/docker ]
             then
                 echo "Docker detected. Not installing Docker and Docker Compose."
@@ -472,12 +564,52 @@ then
                 apt-get install -y jq
                 echo "Installation of jq finished."
             fi
+            if [ -f /usr/bin/setfacl ]
+            then
+                echo "acl already installed skipping."
+            elif ! [ -f /usr/bin/setfacl ]
+            then
+                echo "acl not detected"
+                echo "Please wait patiently for installation to finish."
+                sleep 10
+                apt-get install -y acl
+                echo "Installation of acl finished."
+            fi
+            mkdir -p /usr/gsh
+            als=$(cat /${HOME}/.bashrc | grep gsh)
+            if [ "$als" == "" ]
+            then
+                echo "alias gsh='bash /usr/gsh/script-files/gsh'" >> ~/.bashrc
+            fi
+            echo "Do you have a tar archive from a previous install?(y/N)"
+            read ans
+            ans="${ans:-n}"
+            ans=$(echo $ans | awk '{print tolower($0)}')
+            if [ "$ans" == "y" ]
+            then
+                echo "What is the full file path of the tar archive?(/path/to/archive/gsh-docker-archive.tar.gz)"
+                read filepath
+                tar -xzf $filepath /
+                ec=$?
+                if [ $ec -eq 0 ]
+                then
+                    echo "Extracted contents if gsh-docker-archive.tar.gz successfully. Moving to next step."
+                else
+                    echo "Failed to properly extract archive contents! Exiting..."
+                    exit 1
+                fi
+                cp -r ./gsh/messages /usr/gsh
+                cp -r ./gsh/script-files /usr/gsh
+            else
+                cp -r ./gsh /usr
+            fi
         fi
         if ! [ -d /usr/gsh/environment ]
         then
             mkdir -p /usr/gsh/environment
             cp ./examples/donation-ctrl.env /usr/gsh/environment/donation-ctrl.env
             cp ./examples/donation-ticker.env /usr/gsh/environment/donation-ticker.env
+            setfacl -m u:${USER}:rw /usr/gsh/environment/donation-ticker.env
         fi
         if ! [ -f /usr/gsh/docker/factorio/factorio.env ]
         then
