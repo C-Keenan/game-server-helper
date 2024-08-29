@@ -1,5 +1,12 @@
 #!/usr/bin/env bash
-
+if ! [ -d /tmp/gsh ]
+then
+  mkdir -p /tmp/gsh
+fi
+if ! [ -f /tmp/gsh/donation-ticker.env ]
+then
+  touch /tmp/gsh/donation-ticker.env
+fi
 if [ -f /usr/bin/sudo ]
 then
   if [ "$1" == "factorio" ]
@@ -37,6 +44,12 @@ then
     elif [ "$2" == "tail-logs" ]
     then
       docker compose -f /usr/gsh/docker/factorio/docker-compose.yml logs -f
+    elif [ "$2" == "restart" ]
+    then
+      docker compose -f /usr/gsh/docker/factorio/docker-compose.yml restart
+    elif [ "$2" == "recreate" ]
+    then
+      docker compose -f /usr/gsh/docker/factorio/docker-compose.yml up -d --force-recreate
     elif [ "$2" == "--help" ]
     then
       cat /usr/gsh/messages/help/factorio-help.txt
@@ -63,6 +76,12 @@ then
     elif [ "$2" == "tail-logs" ]
     then
       docker compose -f /usr/gsh/docker/satisfactory/docker-compose.yml logs -f
+    elif [ "$2" == "restart" ]
+    then
+      docker compose -f /usr/gsh/docker/satisfactory/docker-compose.yml restart
+    elif [ "$2" == "recreate" ]
+    then
+      docker compose -f /usr/gsh/docker/satisfactory/docker-compose.yml up -d --force-recreate
     elif [ "$2" == "--help" ]
     then
       cat /usr/gsh/messages/help/satisfactory-help.txt
@@ -89,6 +108,12 @@ then
     elif [ "$2" == "tail-logs" ]
     then
       docker compose -f /usr/gsh/docker/veloren/docker-compose.yml logs -f
+    elif [ "$2" == "restart" ]
+    then
+      docker compose -f /usr/gsh/docker/veloren/docker-compose.yml restart
+    elif [ "$2" == "recreate" ]
+    then
+      docker compose -f /usr/gsh/docker/veloren/docker-compose.yml up -d --force-recreate
     elif [ "$2" == "--help" ]
     then
       cat /usr/gsh/messages/help/veloren-help.txt
@@ -115,6 +140,12 @@ then
     elif [ "$2" == "tail-logs" ]
     then
       docker compose -f /usr/gsh/docker/minecraft/docker-compose.yml logs -f
+    elif [ "$2" == "restart" ]
+    then
+      docker compose -f /usr/gsh/docker/minecraft/docker-compose.yml restart
+    elif [ "$2" == "recreate" ]
+    then
+      docker compose -f /usr/gsh/docker/minecraft/docker-compose.yml up -d --force-recreate
     elif [ "$2" == "--help" ]
     then
       cat /usr/gsh/messages/help/minecraft-help.txt
