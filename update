@@ -22,6 +22,7 @@ then
                 cp ./examples/donation-ctrl.env /usr/gsh/environment/donation-ctrl.env
                 cp ./examples/donation-ticker.env /usr/gsh/environment/donation-ticker.env
             fi
+            setfacl -m u:${USER}:rw /usr/gsh/environment/donation-ticker.env
             if ! [ -f /usr/gsh/docker/factorio/factorio.env ]
             then
                 cp ./examples/factorio.env /usr/gsh/docker/factorio/factorio.env
@@ -54,6 +55,7 @@ then
                 sudo cp ./examples/donation-ctrl.env /usr/gsh/environment/donation-ctrl.env
                 sudo cp ./examples/donation-ticker.env /usr/gsh/environment/donation-ticker.env
             fi
+            sudo setfacl -m u:${USER}:rw /usr/gsh/environment/donation-ticker.env
             if ! [ -f /usr/gsh/docker/factorio/factorio.env ]
             then
                 sudo cp ./examples/factorio.env /usr/gsh/docker/factorio/factorio.env
@@ -87,6 +89,7 @@ then
             cp ./examples/donation-ctrl.env /usr/gsh/environment/donation-ctrl.env
             cp ./examples/donation-ticker.env /usr/gsh/environment/donation-ticker.env
         fi
+        setfacl -m u:${USER}:rw /usr/gsh/environment/donation-ticker.env
         if ! [ -f /usr/gsh/docker/factorio/factorio.env ]
         then
             cp ./examples/factorio.env /usr/gsh/docker/factorio/factorio.env
@@ -120,6 +123,7 @@ then
                 cp ./examples/donation-ctrl.env /usr/gsh/environment/donation-ctrl.env
                 cp ./examples/donation-ticker.env /usr/gsh/environment/donation-ticker.env
             fi
+            setfacl -m u:${USER}:rw /usr/gsh/environment/donation-ticker.env
             if ! [ -f /usr/gsh/docker/factorio/factorio.env ]
             then
                 cp ./examples/factorio.env /usr/gsh/docker/factorio/factorio.env
@@ -148,6 +152,7 @@ then
                 sudo cp ./examples/donation-ctrl.env /usr/gsh/environment/donation-ctrl.env
                 sudo cp ./examples/donation-ticker.env /usr/gsh/environment/donation-ticker.env
             fi
+            sudo setfacl -m u:${USER}:rw /usr/gsh/environment/donation-ticker.env
             if ! [ -f /usr/gsh/docker/factorio/factorio.env ]
             then
                 sudo cp ./examples/factorio.env /usr/gsh/docker/factorio/factorio.env
@@ -177,6 +182,7 @@ then
             cp ./examples/donation-ctrl.env /usr/gsh/environment/donation-ctrl.env
             cp ./examples/donation-ticker.env /usr/gsh/environment/donation-ticker.env
         fi
+        setfacl -m u:${USER}:rw /usr/gsh/environment/donation-ticker.env
         if ! [ -f /usr/gsh/docker/factorio/factorio.env ]
         then
             cp ./examples/factorio.env /usr/gsh/docker/factorio/factorio.env
