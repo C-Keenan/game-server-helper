@@ -20,7 +20,7 @@ then
       then
         docker compose -f /usr/gsh/docker/factorio/docker-compose.yml down
       else
-        x=$(($(cat /usr/gsh/docker/factorio/config/server-settings.json | grep autosave_interval | awk 'FNR==2{print$0}' | colrm 1 23 | colrm 3)*60))
+        x=$(($(cat /usr/gsh/docker/factorio/config/server-settings.json | jq .autosave_interval)*60))
         while [ $x -ge 0 ]
         do
           if [ $x -gt 0 ]
