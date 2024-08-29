@@ -136,19 +136,20 @@ then
     cat /usr/gsh/messages/help/help.txt
     printf '\n'
   fi
-
-  source /usr/gsh/environment/donation-ticker.env
   source /usr/gsh/environment/donation-ctrl.env
-
   if [ "$donationmessage" -eq 0 ]
   then
-    if (( dt % 3 == 0 && dt % 10 == 0 ))
+    source /usr/gsh/environment/donation-ticker.env
+    if [ $dt -ne 0 ]
     then
-      echo "Thank you for using 'Game Server Helper'. If you have found it helpful and would like to support the project, and others, please head on over to my KoFi: 'https://ko-fi.com/lollypopstealer'. Any support you can show would be greatly appreciated. Thank you again for using 'Game Server Helper'."
+      if (( dt % 3 == 0 && dt % 10 == 0 ))
+      then
+        echo "Thank you for using 'Game Server Helper'. If you have found it helpful and would like to support the project, and others, please head on over to my KoFi: 'https://ko-fi.com/lollypopstealer'. Any support you can show would be greatly appreciated. Thank you again for using 'Game Server Helper'."
+      fi
     fi
     dt=$(( $dt + 1 ))
-    echo "dt=$dt" 2>/dev/null 1> /tmp/donation-ticker.env
-    sudo cp /tmp/donation-ticker.env /usr/gsh/environment/donation-ticker.env
+    echo "dt=$dt" > /tmp/gsh/donation-ticker.env
+    sudo cp /tmp/gsh/donation-ticker.env /usr/gsh/environment/donation-ticker.env
   fi
 else
   if [ "$1" == "factorio" ]
@@ -162,7 +163,7 @@ else
       then
         docker compose -f /usr/gsh/docker/factorio/docker-compose.yml down
       else
-        x=$(($(cat /usr/gsh/docker/factorio/config/server-settings.json | grep autosave_interval | awk 'FNR==2{print$0}' | colrm 1 23 | colrm 3)*60))
+        x=$(($(cat /usr/gsh/docker/factorio/config/server-settings.json | jq .autosave_interval)*60))
         while [ $x -ge 0 ]
         do
           if [ $x -gt 0 ]
@@ -186,6 +187,12 @@ else
     elif [ "$2" == "tail-logs" ]
     then
       docker compose -f /usr/gsh/docker/factorio/docker-compose.yml logs -f
+    elif [ "$2" == "restart" ]
+    then
+      docker compose -f /usr/gsh/docker/factorio/docker-compose.yml restart
+    elif [ "$2" == "recreate" ]
+    then
+      docker compose -f /usr/gsh/docker/factorio/docker-compose.yml up -d --force-recreate
     elif [ "$2" == "--help" ]
     then
       cat /usr/gsh/messages/help/factorio-help.txt
@@ -212,6 +219,12 @@ else
     elif [ "$2" == "tail-logs" ]
     then
       docker compose -f /usr/gsh/docker/satisfactory/docker-compose.yml logs -f
+    elif [ "$2" == "restart" ]
+    then
+      docker compose -f /usr/gsh/docker/satisfactory/docker-compose.yml restart
+    elif [ "$2" == "recreate" ]
+    then
+      docker compose -f /usr/gsh/docker/satisfactory/docker-compose.yml up -d --force-recreate
     elif [ "$2" == "--help" ]
     then
       cat /usr/gsh/messages/help/satisfactory-help.txt
@@ -238,6 +251,12 @@ else
     elif [ "$2" == "tail-logs" ]
     then
       docker compose -f /usr/gsh/docker/veloren/docker-compose.yml logs -f
+    elif [ "$2" == "restart" ]
+    then
+      docker compose -f /usr/gsh/docker/veloren/docker-compose.yml restart
+    elif [ "$2" == "recreate" ]
+    then
+      docker compose -f /usr/gsh/docker/veloren/docker-compose.yml up -d --force-recreate
     elif [ "$2" == "--help" ]
     then
       cat /usr/gsh/messages/help/veloren-help.txt
@@ -264,6 +283,12 @@ else
     elif [ "$2" == "tail-logs" ]
     then
       docker compose -f /usr/gsh/docker/minecraft/docker-compose.yml logs -f
+    elif [ "$2" == "restart" ]
+    then
+      docker compose -f /usr/gsh/docker/minecraft/docker-compose.yml restart
+    elif [ "$2" == "recreate" ]
+    then
+      docker compose -f /usr/gsh/docker/minecraft/docker-compose.yml up -d --force-recreate
     elif [ "$2" == "--help" ]
     then
       cat /usr/gsh/messages/help/minecraft-help.txt
@@ -289,11 +314,14 @@ else
   if [ "$donationmessage" -eq 0 ]
   then
     source /usr/gsh/environment/donation-ticker.env
-    if (( dt % 3 == 0 && dt % 10 == 0 ))
+    if [ $dt -ne 0 ]
     then
-      echo "Thank you for using 'Game Server Helper'. If you have found it helpful and would like to support the project, and others, please head on over to my KoFi: 'https://ko-fi.com/lollypopstealer'. Any support you can show would be greatly appreciated. Thank you again for using 'Game Server Helper'."
+      if (( dt % 3 == 0 && dt % 10 == 0 ))
+      then
+        echo "Thank you for using 'Game Server Helper'. If you have found it helpful and would like to support the project, and others, please head on over to my KoFi: 'https://ko-fi.com/lollypopstealer'. Any support you can show would be greatly appreciated. Thank you again for using 'Game Server Helper'."
+      fi
     fi
-    dt=$(( $dt + 1 ))
+    dt=$(($dt+1))
     echo "dt=$dt" > /tmp/gsh/donation-ticker.env
     cp /tmp/gsh/donation-ticker.env /usr/gsh/environment/donation-ticker.env
   fi
