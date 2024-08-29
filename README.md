@@ -6,7 +6,7 @@
 
 - Idea still WIP and currently stalled due to personal reasons, however, I am planning to start it back up within a month or so. I'll keep you informed as best as I can.
 
-- Please see 'Release 08/28/2024' for newly added features to the current implementation.
+- Please see 'Release 08/28/2024' for newly added features and changes to the current implementation.
 
 ### Announcement 07/26/2024
 
@@ -27,6 +27,10 @@
 - Added "restart" and "recreate" options to all game server commands
 
 - Changed to Jquery processing for timer function for 'Factorio' as I realized the limitations of the colrm command as I had it configured before
+
+- Changed to acl control of env instead of sudo. The command, if you need to set up more users for access, is `setfacl -m u:${USER}:rw /usr/gsh/environment/donation-ticker.env` . Replace `${USER}` with the username of the user. If not running as root you will need 'sudo' privledges to edit the acl rules, as set forth by the acl package. If adding more than the installing user you may want to add the alias to their `.bashrc` or `.bash_aliases` with the command `"alias gsh='bash /usr/gsh/script-files/gsh'" >> ~/.bashrc` .
+
+- A more in depth installer shall be released soon that will account for system-wide aliasing for this script
 
 ### Release 07/25/2024
 

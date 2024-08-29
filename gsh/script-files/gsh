@@ -180,7 +180,7 @@ then
     fi
     dt=$(( $dt + 1 ))
     echo "dt=$dt" > /tmp/gsh/donation-ticker.env
-    sudo cp /tmp/gsh/donation-ticker.env /usr/gsh/environment/donation-ticker.env
+    cp /tmp/gsh/donation-ticker.env /usr/gsh/environment/donation-ticker.env
   fi
 else
   if [ "$1" == "factorio" ]
