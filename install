@@ -6,7 +6,6 @@ echo "Would you like to install 'Game Server Helper'? yes/no"
 read rsp
 rsp=$(echo $rsp | awk '{print tolower($0)}')
 clear
-
 if [ -f /usr/bin/sudo ]
 then
     if [ $EUID -eq 0 ]
@@ -20,7 +19,28 @@ then
                 then
                     echo "alias gsh='bash /usr/gsh/script-files/gsh'" >> ~/.bashrc
                 fi
-                cp -r ./gsh /usr 2>/dev/null
+                echo "Do you have a tar archive from a previous install?(y/N)"
+                read ans
+                ans="${ans:-n}"
+                ans=$(echo $ans | awk '{print tolower($0)}')
+                if [ "$ans" == "y" ]
+                then
+                    echo "What is the full file path of the tar archive?(/path/to/archive/gsh-docker-archive.tar.gz)"
+                    read filepath
+                    tar -xzf $filepath /
+                    ec=$?
+                    if [ $ec -eq 0 ]
+                    then
+                        echo "Extracted contents if gsh-docker-archive.tar.gz successfully. Moving to next step."
+                    else
+                        echo "Failed to properly extract archive contents! Exiting..."
+                        exit 1
+                    fi
+                    cp -r ./gsh/messages /usr/gsh
+                    cp -r ./gsh/script-files /usr/gsh
+                else
+                    cp -r ./gsh /usr
+                fi
                 if [ -f /usr/bin/docker ]
                 then
                     echo "Docker detected. Not installing Docker and Docker Compose."
@@ -94,6 +114,17 @@ then
                     apt-get install -y bsdutils bsdmainutils bsdextrautils 2>/dev/null 1>/dev/null
                     echo "Installation of bsdutils bsdmainutils bsdextrautils (contains colrm utility) finished."
                 fi
+                if [ -f /usr/bin/jq ]
+                then
+                    echo "JQUERY already installed skipping."
+                elif ! [ -f /usr/bin/jq ]
+                then
+                    echo "JQUERY not detected"
+                    echo "Please wait patiently for installation to finish."
+                    sleep 10
+                    apt-get install -y jq
+                    echo "Installation of jq finished."
+                fi
             fi
             if ! [ -d /usr/gsh/environment ]
             then
@@ -141,7 +172,28 @@ then
                 then
                     sudo echo "alias gsh='bash /usr/gsh/script-files/gsh'" >> ~/.bashrc
                 fi
-                sudo cp -r ./gsh /usr 2>/dev/null
+                echo "Do you have a tar archive from a previous install?(y/N)"
+                read ans
+                ans="${ans:-n}"
+                ans=$(echo $ans | awk '{print tolower($0)}')
+                if [ "$ans" == "y" ]
+                then
+                    echo "What is the full file path of the tar archive?(/path/to/archive/gsh-docker-archive.tar.gz)"
+                    read filepath
+                    sudo tar -xzf $filepath /
+                    ec=$?
+                    if [ $ec -eq 0 ]
+                    then
+                        echo "Extracted contents if gsh-docker-archive.tar.gz successfully. Moving to next step."
+                    else
+                        echo "Failed to properly extract archive contents! Exiting..."
+                        exit 1
+                    fi
+                    sudo cp -r ./gsh/messages /usr/gsh
+                    sudo cp -r ./gsh/script-files /usr/gsh
+                else
+                    sudo cp -r ./gsh /usr
+                fi
                 if [ -f /usr/bin/docker ]
                 then
                     echo "Docker detected. Not installing Docker and Docker Compose."
@@ -263,11 +315,32 @@ then
         if [ -d /usr/gsh ]
         then
             als=$(cat /${HOME}/.bashrc | grep gsh)
-                if [ "$als" == "" ]
+            if [ "$als" == "" ]
+            then
+                echo "alias gsh='bash /usr/gsh/script-files/gsh'" >> ~/.bashrc
+            fi
+            echo "Do you have a tar archive from a previous install?(y/N)"
+            read ans
+            ans="${ans:-n}"
+            ans=$(echo $ans | awk '{print tolower($0)}')
+            if [ "$ans" == "y" ]
+            then
+                echo "What is the full file path of the tar archive?(/path/to/archive/gsh-docker-archive.tar.gz)"
+                read filepath
+                tar -xzf $filepath /
+                ec=$?
+                if [ $ec -eq 0 ]
                 then
-                    echo "alias gsh='bash /usr/gsh/script-files/gsh'" >> ~/.bashrc
+                    echo "Extracted contents if gsh-docker-archive.tar.gz successfully. Moving to next step."
+                else
+                    echo "Failed to properly extract archive contents! Exiting..."
+                    exit 1
                 fi
-            cp -r ./gsh /usr 2>/dev/null
+                cp -r ./gsh/messages /usr/gsh
+                cp -r ./gsh/script-files /usr/gsh
+            else
+                cp -r ./gsh /usr
+            fi
             if [ -f /usr/bin/docker ]
             then
                 echo "Docker detected. Not installing Docker and Docker Compose."

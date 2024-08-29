@@ -2,6 +2,12 @@
 
 ## Announcements
 
+### Announcement 08/28/2024
+
+- Idea still WIP and currently stalled due to personal reasons, however, I am planning to start it back up within a month or so. I'll keep you informed as best as I can.
+
+- Please see 'Release 08/28/2024' for newly added features to the current implementation.
+
 ### Announcement 07/26/2024
 
 - Working on an idea to run a postgresql database, or potentially nosql/sqlite, as I would prefer not having to run sudo in the main script for the donation ticker. Donation message will not be moving to sql database and database will NOT be getting synced with anything outside of your local network if/when implemented.
@@ -15,6 +21,12 @@
 - No other ideas are currently in the works but I will keep this announcement section up to date with progress. If you have any suggestions or ideas please don't hesitate to contact me at dev+gsh-feature-requests@lollypopstealer.com as I don't really go on github unless I'm merging the 'nightly' branch to the main branch.
 
 ## Release Notes
+
+### Release 08/28/2024
+
+- Added "restart" and "recreate" options to all game server commands
+
+- Changed to Jquery processing for timer function for 'Factorio' as I realized the limitations of the colrm command as I had it configured before
 
 ### Release 07/25/2024
 
