@@ -73,6 +73,17 @@ then
                     apt-get install -y bsdutils bsdmainutils bsdextrautils 2>/dev/null 1>/dev/null
                     echo "Installation of bsdutils bsdmainutils bsdextrautils (contains colrm utility) finished."
                 fi
+                if [ -f /usr/bin/jq ]
+                then
+                    echo "JQUERY already installed skipping."
+                elif ! [ -f /usr/bin/jq ]
+                then
+                    echo "JQUERY not detected"
+                    echo "Please wait patiently for installation to finish."
+                    sleep 10
+                    apt-get install -y jq
+                    echo "Installation of jq finished."
+                fi
             elif ! [ -d /usr/gsh ]
             then
                 mkdir -p /usr/gsh
@@ -228,6 +239,17 @@ then
                     sudo apt-get install -y bsdutils bsdmainutils bsdextrautils 2>/dev/null 1>/dev/null
                     echo "Installation of bsdutils bsdmainutils bsdextrautils (contains colrm utility) finished."
                 fi
+                if [ -f /usr/bin/jq ]
+                then
+                    echo "JQUERY already installed skipping."
+                elif ! [ -f /usr/bin/jq ]
+                then
+                    echo "JQUERY not detected"
+                    echo "Please wait patiently for installation to finish."
+                    sleep 10
+                    apt-get install -y jq
+                    echo "Installation of jq finished."
+                fi
             elif ! [ -d /usr/gsh ]
             then
                 sudo mkdir -p /usr/gsh
@@ -270,6 +292,17 @@ then
                     sleep 10
                     sudo apt-get install -y bsdutils bsdmainutils bsdextrautils 2>/dev/null 1>/dev/null
                     echo "Installation of bsdutils bsdmainutils bsdextrautils (contains colrm utility) finished."
+                fi
+                if [ -f /usr/bin/jq ]
+                then
+                    echo "JQUERY already installed skipping."
+                elif ! [ -f /usr/bin/jq ]
+                then
+                    echo "JQUERY not detected"
+                    echo "Please wait patiently for installation to finish."
+                    sleep 10
+                    apt-get install -y jq
+                    echo "Installation of jq finished."
                 fi
             fi
             if ! [ -d /usr/gsh/environment ]
@@ -374,6 +407,17 @@ then
                 apt-get install -y bsdutils bsdmainutils bsdextrautils 2>/dev/null 1>/dev/null
                 echo "Installation of bsdutils bsdmainutils bsdextrautils (contains colrm utility) finished."
             fi
+            if [ -f /usr/bin/jq ]
+            then
+                echo "JQUERY already installed skipping."
+            elif ! [ -f /usr/bin/jq ]
+            then
+                echo "JQUERY not detected"
+                echo "Please wait patiently for installation to finish."
+                sleep 10
+                apt-get install -y jq
+                echo "Installation of jq finished."
+            fi
         elif ! [ -d /usr/gsh ]
         then
             mkdir -p /usr/gsh
@@ -416,6 +460,17 @@ then
                 sleep 10
                 apt-get install -y bsdutils bsdmainutils bsdextrautils 2>/dev/null 1>/dev/null
                 echo "Installation of bsdutils bsdmainutils bsdextrautils (contains colrm utility) finished."
+            fi
+            if [ -f /usr/bin/jq ]
+            then
+                echo "JQUERY already installed skipping."
+            elif ! [ -f /usr/bin/jq ]
+            then
+                echo "JQUERY not detected"
+                echo "Please wait patiently for installation to finish."
+                sleep 10
+                apt-get install -y jq
+                echo "Installation of jq finished."
             fi
         fi
         if ! [ -d /usr/gsh/environment ]
