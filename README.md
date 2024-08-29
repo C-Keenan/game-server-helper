@@ -24,7 +24,7 @@
 
 ### Release 08/28/2024
 
-- Added "restart" and "recreate" ooptions to all game server commands
+- Added "restart" and "recreate" options to all game server commands
 
 - Changed to Jquery processing for timer function for 'Factorio' as I realized the limitations of the colrm command as I had it configured before
 
