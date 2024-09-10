@@ -2,6 +2,10 @@
 
 ## Announcements
 
+### Announcement 09/10/2024
+
+Working on getting bugs worked out for the Satisfactory 1.0 release. I will have the updated files push to this repo asap.
+
 ### Announcement 08/28/2024
 
 - Idea still WIP and currently stalled due to personal reasons, however, I am planning to start it back up within a month or so. I'll keep you informed as best as I can.
