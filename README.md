@@ -2,6 +2,16 @@
 
 ## Announcements
 
+### Announcement 09/15/2024
+
+Apologies for the wait. The bug I was experiencing seems to have been because Satisfactory was running in a virtualized environment. This can be fixed by passing the name of your CPU to the virtual machine. Please follow your hypervisors documentation on changing how the virtual CPU is named.
+
+In other news, the updated environment file and docker-compose.yml are also provided. Please save a backup of any files that have been changed since the installation as when you run the update script it will overwrite any file with changes, as currently it is just comparing the sha256 hashes of the environment files and since the new environment won't be the same as your changed environment it will overwrite to the defaults recommended by the docker image maintainer. The update script asks you if you'd like to save any changes before proceeding so any losses in data are on you the user to mitigate.
+
+On to a more personal update...
+
+Not long ago my fiance and I experienced a loss in the immediate family and we are currently recovering and realigning our household situation because of that. I apologize for any problems that may have came about, or may still come about, as we work through this tumultuous period in our lives. Please keep your loved ones close as you may never know when you'll see them again.
+
 ### Announcement 09/10/2024
 
 Working on getting bugs worked out for the Satisfactory 1.0 release. I will have the updated files push to this repo asap.

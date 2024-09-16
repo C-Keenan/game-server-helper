@@ -26,18 +26,46 @@ then
             if ! [ -f /usr/gsh/docker/factorio/factorio.env ]
             then
                 cp ./examples/factorio.env /usr/gsh/docker/factorio/factorio.env
+            else
+                oldhash=$(sha256sum /usr/gsh/docker/factorio/factorio.env)
+                newhash=$(sha256sum ./examples/factorio.env)
+                if [ "$newhash" != "$oldhash" ]
+                then
+                    cp ./examples/factorio.env /usr/gsh/docker/factorio/factorio.env
+                fi
             fi
             if ! [ -f /usr/gsh/docker/satisfactory/satisfactory.env ]
             then
                 cp ./examples/satisfactory.env /usr/gsh/docker/satisfactory/satisfactory.env
+            else
+                oldhash=$(sha256sum /usr/gsh/docker/satisfactory/satisfactory.env)
+                newhash=$(sha256sum ./examples/satisfactory.env)
+                if [ "$newhash" != "$oldhash" ]
+                then
+                    cp ./examples/satisfactory.env /usr/gsh/docker/satisfactory/satisfactory.env
+                fi
             fi
             if ! [ -f /usr/gsh/docker/minecraft/minecraft.env ]
             then
                 cp ./examples/minecraft.env /usr/gsh/docker/minecraft/minecraft.env
+            else
+                oldhash=$(sha256sum /usr/gsh/docker/minecraft/minecraft.env)
+                newhash=$(sha256sum ./examples/minecraft.env)
+                if [ "$newhash" != "$oldhash" ]
+                then
+                    cp ./examples/minecraft.env /usr/gsh/docker/minecraft/minecraft.env
+                fi
             fi
             if ! [ -f /usr/gsh/docker/veloren/veloren.env ]
             then
                 cp ./examples/veloren.env /usr/gsh/docker/veloren/veloren.env
+            else
+                oldhash=$(sha256sum /usr/gsh/docker/veloren/veloren.env)
+                newhash=$(sha256sum ./examples/veloren.env)
+                if [ "$newhash" != "$oldhash" ]
+                then
+                    cp ./examples/veloren.env /usr/gsh/docker/veloren/veloren.env
+                fi
             fi
             echo "Update Completed! Thank You! :)"
         elif [ $EUID -ge 1000 ]
@@ -59,18 +87,46 @@ then
             if ! [ -f /usr/gsh/docker/factorio/factorio.env ]
             then
                 sudo cp ./examples/factorio.env /usr/gsh/docker/factorio/factorio.env
+            else
+                oldhash=$(sha256sum /usr/gsh/docker/factorio/factorio.env)
+                newhash=$(sha256sum ./examples/factorio.env)
+                if [ "$newhash" != "$oldhash" ]
+                then
+                    sudo cp ./examples/factorio.env /usr/gsh/docker/factorio/factorio.env
+                fi
             fi
             if ! [ -f /usr/gsh/docker/satisfactory/satisfactory.env ]
             then
                 sudo cp ./examples/satisfactory.env /usr/gsh/docker/satisfactory/satisfactory.env
+            else
+                oldhash=$(sha256sum /usr/gsh/docker/satisfactory/satisfactory.env)
+                newhash=$(sha256sum ./examples/satisfactory.env)
+                if [ "$newhash" != "$oldhash" ]
+                then
+                    sudo cp ./examples/satisfactory.env /usr/gsh/docker/satisfactory/satisfactory.env
+                fi
             fi
             if ! [ -f /usr/gsh/docker/minecraft/minecraft.env ]
             then
                 sudo cp ./examples/minecraft.env /usr/gsh/docker/minecraft/minecraft.env
+            else
+                oldhash=$(sha256sum /usr/gsh/docker/minecraft/minecraft.env)
+                newhash=$(sha256sum ./examples/minecraft.env)
+                if [ "$newhash" != "$oldhash" ]
+                then
+                    sudo cp ./examples/minecraft.env /usr/gsh/docker/minecraft/minecraft.env
+                fi
             fi
             if ! [ -f /usr/gsh/docker/veloren/veloren.env ]
             then
                 sudo cp ./examples/veloren.env /usr/gsh/docker/veloren/veloren.env
+            else
+                oldhash=$(sha256sum /usr/gsh/docker/veloren/veloren.env)
+                newhash=$(sha256sum ./examples/veloren.env)
+                if [ "$newhash" != "$oldhash" ]
+                then
+                    sudo cp ./examples/veloren.env /usr/gsh/docker/veloren/veloren.env
+                fi
             fi
             echo "Update Completed! Thank You! :)"
         fi
@@ -91,21 +147,49 @@ then
         fi
         setfacl -m u:${USER}:rw /usr/gsh/environment/donation-ticker.env
         if ! [ -f /usr/gsh/docker/factorio/factorio.env ]
-        then
-            cp ./examples/factorio.env /usr/gsh/docker/factorio/factorio.env
-        fi
-        if ! [ -f /usr/gsh/docker/satisfactory/satisfactory.env ]
-        then
-            cp ./examples/satisfactory.env /usr/gsh/docker/satisfactory/satisfactory.env
-        fi
-        if ! [ -f /usr/gsh/docker/minecraft/minecraft.env ]
-        then
-            cp ./examples/minecraft.env /usr/gsh/docker/minecraft/minecraft.env
-        fi
-        if ! [ -f /usr/gsh/docker/veloren/veloren.env ]
-        then
-            cp ./examples/veloren.env /usr/gsh/docker/veloren/veloren.env
-        fi
+            then
+                cp ./examples/factorio.env /usr/gsh/docker/factorio/factorio.env
+            else
+                oldhash=$(sha256sum /usr/gsh/docker/factorio/factorio.env)
+                newhash=$(sha256sum ./examples/factorio.env)
+                if [ "$newhash" != "$oldhash" ]
+                then
+                    cp ./examples/factorio.env /usr/gsh/docker/factorio/factorio.env
+                fi
+            fi
+            if ! [ -f /usr/gsh/docker/satisfactory/satisfactory.env ]
+            then
+                cp ./examples/satisfactory.env /usr/gsh/docker/satisfactory/satisfactory.env
+            else
+                oldhash=$(sha256sum /usr/gsh/docker/satisfactory/satisfactory.env)
+                newhash=$(sha256sum ./examples/satisfactory.env)
+                if [ "$newhash" != "$oldhash" ]
+                then
+                    cp ./examples/satisfactory.env /usr/gsh/docker/satisfactory/satisfactory.env
+                fi
+            fi
+            if ! [ -f /usr/gsh/docker/minecraft/minecraft.env ]
+            then
+                cp ./examples/minecraft.env /usr/gsh/docker/minecraft/minecraft.env
+            else
+                oldhash=$(sha256sum /usr/gsh/docker/minecraft/minecraft.env)
+                newhash=$(sha256sum ./examples/minecraft.env)
+                if [ "$newhash" != "$oldhash" ]
+                then
+                    cp ./examples/minecraft.env /usr/gsh/docker/minecraft/minecraft.env
+                fi
+            fi
+            if ! [ -f /usr/gsh/docker/veloren/veloren.env ]
+            then
+                cp ./examples/veloren.env /usr/gsh/docker/veloren/veloren.env
+            else
+                oldhash=$(sha256sum /usr/gsh/docker/veloren/veloren.env)
+                newhash=$(sha256sum ./examples/veloren.env)
+                if [ "$newhash" != "$oldhash" ]
+                then
+                    cp ./examples/veloren.env /usr/gsh/docker/veloren/veloren.env
+                fi
+            fi
         echo "Update Completed! Thank You! :)"
     fi
 elif [ "$ans" == "NO" ]
@@ -127,18 +211,46 @@ then
             if ! [ -f /usr/gsh/docker/factorio/factorio.env ]
             then
                 cp ./examples/factorio.env /usr/gsh/docker/factorio/factorio.env
+            else
+                oldhash=$(sha256sum /usr/gsh/docker/factorio/factorio.env)
+                newhash=$(sha256sum ./examples/factorio.env)
+                if [ "$newhash" != "$oldhash" ]
+                then
+                    cp ./examples/factorio.env /usr/gsh/docker/factorio/factorio.env
+                fi
             fi
             if ! [ -f /usr/gsh/docker/satisfactory/satisfactory.env ]
             then
                 cp ./examples/satisfactory.env /usr/gsh/docker/satisfactory/satisfactory.env
+            else
+                oldhash=$(sha256sum /usr/gsh/docker/satisfactory/satisfactory.env)
+                newhash=$(sha256sum ./examples/satisfactory.env)
+                if [ "$newhash" != "$oldhash" ]
+                then
+                    cp ./examples/satisfactory.env /usr/gsh/docker/satisfactory/satisfactory.env
+                fi
             fi
             if ! [ -f /usr/gsh/docker/minecraft/minecraft.env ]
             then
                 cp ./examples/minecraft.env /usr/gsh/docker/minecraft/minecraft.env
+            else
+                oldhash=$(sha256sum /usr/gsh/docker/minecraft/minecraft.env)
+                newhash=$(sha256sum ./examples/minecraft.env)
+                if [ "$newhash" != "$oldhash" ]
+                then
+                    cp ./examples/minecraft.env /usr/gsh/docker/minecraft/minecraft.env
+                fi
             fi
             if ! [ -f /usr/gsh/docker/veloren/veloren.env ]
             then
                 cp ./examples/veloren.env /usr/gsh/docker/veloren/veloren.env
+            else
+                oldhash=$(sha256sum /usr/gsh/docker/veloren/veloren.env)
+                newhash=$(sha256sum ./examples/veloren.env)
+                if [ "$newhash" != "$oldhash" ]
+                then
+                    cp ./examples/veloren.env /usr/gsh/docker/veloren/veloren.env
+                fi
             fi
             echo "Update Completed! Thank You! :)"
         elif [ $EUID -ge 1000 ]
@@ -156,18 +268,46 @@ then
             if ! [ -f /usr/gsh/docker/factorio/factorio.env ]
             then
                 sudo cp ./examples/factorio.env /usr/gsh/docker/factorio/factorio.env
+            else
+                oldhash=$(sha256sum /usr/gsh/docker/factorio/factorio.env)
+                newhash=$(sha256sum ./examples/factorio.env)
+                if [ "$newhash" != "$oldhash" ]
+                then
+                    sudo cp ./examples/factorio.env /usr/gsh/docker/factorio/factorio.env
+                fi
             fi
             if ! [ -f /usr/gsh/docker/satisfactory/satisfactory.env ]
             then
                 sudo cp ./examples/satisfactory.env /usr/gsh/docker/satisfactory/satisfactory.env
+            else
+                oldhash=$(sha256sum /usr/gsh/docker/satisfactory/satisfactory.env)
+                newhash=$(sha256sum ./examples/satisfactory.env)
+                if [ "$newhash" != "$oldhash" ]
+                then
+                    sudo cp ./examples/satisfactory.env /usr/gsh/docker/satisfactory/satisfactory.env
+                fi
             fi
             if ! [ -f /usr/gsh/docker/minecraft/minecraft.env ]
             then
                 sudo cp ./examples/minecraft.env /usr/gsh/docker/minecraft/minecraft.env
+            else
+                oldhash=$(sha256sum /usr/gsh/docker/minecraft/minecraft.env)
+                newhash=$(sha256sum ./examples/minecraft.env)
+                if [ "$newhash" != "$oldhash" ]
+                then
+                    sudo cp ./examples/minecraft.env /usr/gsh/docker/minecraft/minecraft.env
+                fi
             fi
             if ! [ -f /usr/gsh/docker/veloren/veloren.env ]
             then
                 sudo cp ./examples/veloren.env /usr/gsh/docker/veloren/veloren.env
+            else
+                oldhash=$(sha256sum /usr/gsh/docker/veloren/veloren.env)
+                newhash=$(sha256sum ./examples/veloren.env)
+                if [ "$newhash" != "$oldhash" ]
+                then
+                    sudo cp ./examples/veloren.env /usr/gsh/docker/veloren/veloren.env
+                fi
             fi
             echo "Update Completed! Thank You! :)"
         fi
@@ -184,21 +324,49 @@ then
         fi
         setfacl -m u:${USER}:rw /usr/gsh/environment/donation-ticker.env
         if ! [ -f /usr/gsh/docker/factorio/factorio.env ]
-        then
-            cp ./examples/factorio.env /usr/gsh/docker/factorio/factorio.env
-        fi
-        if ! [ -f /usr/gsh/docker/satisfactory/satisfactory.env ]
-        then
-            cp ./examples/satisfactory.env /usr/gsh/docker/satisfactory/satisfactory.env
-        fi
-        if ! [ -f /usr/gsh/docker/minecraft/minecraft.env ]
-        then
-            cp ./examples/minecraft.env /usr/gsh/docker/minecraft/minecraft.env
-        fi
-        if ! [ -f /usr/gsh/docker/veloren/veloren.env ]
-        then
-            cp ./examples/veloren.env /usr/gsh/docker/veloren/veloren.env
-        fi
+            then
+                cp ./examples/factorio.env /usr/gsh/docker/factorio/factorio.env
+            else
+                oldhash=$(sha256sum /usr/gsh/docker/factorio/factorio.env)
+                newhash=$(sha256sum ./examples/factorio.env)
+                if [ "$newhash" != "$oldhash" ]
+                then
+                    cp ./examples/factorio.env /usr/gsh/docker/factorio/factorio.env
+                fi
+            fi
+            if ! [ -f /usr/gsh/docker/satisfactory/satisfactory.env ]
+            then
+                cp ./examples/satisfactory.env /usr/gsh/docker/satisfactory/satisfactory.env
+            else
+                oldhash=$(sha256sum /usr/gsh/docker/satisfactory/satisfactory.env)
+                newhash=$(sha256sum ./examples/satisfactory.env)
+                if [ "$newhash" != "$oldhash" ]
+                then
+                    cp ./examples/satisfactory.env /usr/gsh/docker/satisfactory/satisfactory.env
+                fi
+            fi
+            if ! [ -f /usr/gsh/docker/minecraft/minecraft.env ]
+            then
+                cp ./examples/minecraft.env /usr/gsh/docker/minecraft/minecraft.env
+            else
+                oldhash=$(sha256sum /usr/gsh/docker/minecraft/minecraft.env)
+                newhash=$(sha256sum ./examples/minecraft.env)
+                if [ "$newhash" != "$oldhash" ]
+                then
+                    cp ./examples/minecraft.env /usr/gsh/docker/minecraft/minecraft.env
+                fi
+            fi
+            if ! [ -f /usr/gsh/docker/veloren/veloren.env ]
+            then
+                cp ./examples/veloren.env /usr/gsh/docker/veloren/veloren.env
+            else
+                oldhash=$(sha256sum /usr/gsh/docker/veloren/veloren.env)
+                newhash=$(sha256sum ./examples/veloren.env)
+                if [ "$newhash" != "$oldhash" ]
+                then
+                    cp ./examples/veloren.env /usr/gsh/docker/veloren/veloren.env
+                fi
+            fi
         echo "Update Completed! Thank You! :)"
     fi
 fi
