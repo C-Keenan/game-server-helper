@@ -66,9 +66,10 @@ then
           if [ $status == '"running"' ]
           then
             docker compose -f $fi down
-            sudo tar -czf $ans2.gsh-docker-archive.tar.gz /usr/gsh/docker/factorio/saves
+            mkdir -p $PWD/gsh-factorio-save-archives
+            sudo tar -czf gsh-factorio-save-archives/$ans2.gsh-docker-archive.tar.gz /usr/gsh/docker/factorio/saves
           else
-            sudo tar -czf $ans2.gsh-docker-archive.tar.gz /usr/gsh/docker/factorio/saves
+            sudo tar -czf gsh-factorio-save-archives/$ans2.gsh-docker-archive.tar.gz /usr/gsh/docker/factorio/saves
           fi
       else
         if [ $status == '"running"' ]
@@ -295,9 +296,10 @@ else
           if [ $status == '"running"' ]
           then
             docker compose -f $fi down
-            tar -czf $ans2.gsh-docker-archive.tar.gz /usr/gsh/docker/factorio/saves
+            mkdir -p $PWD/gsh-factorio-save-archives
+            tar -czf gsh-factorio-save-archives/$ans2.gsh-docker-archive.tar.gz /usr/gsh/docker/factorio/saves
           else
-            tar -czf $ans2.gsh-docker-archive.tar.gz /usr/gsh/docker/factorio/saves
+            tar -czf gsh-factorio-save-archives/$ans2.gsh-docker-archive.tar.gz /usr/gsh/docker/factorio/saves
           fi
       else
         if [ $status == '"running"' ]
