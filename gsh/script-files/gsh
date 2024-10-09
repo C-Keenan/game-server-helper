@@ -97,7 +97,7 @@ then
       do
         docker compose -f $fi logs > /tmp/container-logs.log
         conterm="LogServer: Display: Server API listening on '0.0.0.0:7777'"
-        if grep -Fq "$conterm"
+        if grep -Fq "$conterm" /tmp/container-logs.log
         then
           c=1
         else
