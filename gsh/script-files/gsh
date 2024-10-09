@@ -67,17 +67,17 @@ then
           then
             docker compose -f $fi down
             mkdir -p $PWD/gsh-factorio-save-archives
-            sudo tar -czf gsh-factorio-save-archives/$ans2.gsh-docker-archive.tar.gz /usr/gsh/docker/factorio/saves
+            sudo tar -czf $PWD/gsh-factorio-save-archives/$ans2.gsh-docker-archive.tar.gz /usr/gsh/docker/factorio/saves
           else
-            sudo tar -czf gsh-factorio-save-archives/$ans2.gsh-docker-archive.tar.gz /usr/gsh/docker/factorio/saves
+            sudo tar -czf $PWD/gsh-factorio-save-archives/$ans2.gsh-docker-archive.tar.gz /usr/gsh/docker/factorio/saves
           fi
       else
         if [ $status == '"running"' ]
         then
           docker compose -f $fi down
-          sudo tar -czf PURE-VANILLA.gsh-docker-archive.tar.gz /usr/gsh/docker/factorio/saves
+          sudo tar -czf $PWD/gsh-factorio-save-archives/PURE-VANILLA.gsh-docker-archive.tar.gz /usr/gsh/docker/factorio/saves
         else
-          sudo tar -czf PURE-VANILLA.gsh-docker-archive.tar.gz /usr/gsh/docker/factorio/saves
+          sudo tar -czf $PWD/gsh-factorio-save-archives/PURE-VANILLA.gsh-docker-archive.tar.gz /usr/gsh/docker/factorio/saves
         fi
       fi
     elif [ "$2" == "--help" ]
@@ -297,17 +297,17 @@ else
           then
             docker compose -f $fi down
             mkdir -p $PWD/gsh-factorio-save-archives
-            tar -czf gsh-factorio-save-archives/$ans2.gsh-docker-archive.tar.gz /usr/gsh/docker/factorio/saves
+            tar -czf $PWD/gsh-factorio-save-archives/$ans2.gsh-docker-archive.tar.gz /usr/gsh/docker/factorio/saves
           else
-            tar -czf gsh-factorio-save-archives/$ans2.gsh-docker-archive.tar.gz /usr/gsh/docker/factorio/saves
+            tar -czf $PWD/gsh-factorio-save-archives/$ans2.gsh-docker-archive.tar.gz /usr/gsh/docker/factorio/saves
           fi
       else
         if [ $status == '"running"' ]
         then
           docker compose -f $fi down
-          sudo tar -czf PURE-VANILLA.gsh-docker-archive.tar.gz /usr/gsh/docker/factorio/saves
+          sudo tar -czf $PWD/gsh-factorio-save-archives/PURE-VANILLA.gsh-docker-archive.tar.gz /usr/gsh/docker/factorio/saves
         else
-          sudo tar -czf PURE-VANILLA.gsh-docker-archive.tar.gz /usr/gsh/docker/factorio/saves
+          sudo tar -czf $PWD/gsh-factorio-save-archives/PURE-VANILLA.gsh-docker-archive.tar.gz /usr/gsh/docker/factorio/saves
         fi
       fi
     elif [ "$2" == "--help" ]
