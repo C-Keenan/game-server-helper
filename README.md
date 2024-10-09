@@ -4,7 +4,9 @@
 
 ### Announcement 10/09/2024
 
-Added update function to the satisfactory branch of the gsh script. this will allow you to update the satisfactory game files easily if you have set the `SKIPUPDATE` variable to true in the `satisfactory.env` file. There are plans for the script to allow you to edit the respective files of the containers and environments with your editor of choice as well however there is currently no timeline by which this feature release is planned. I will keep you updated as to when this feature is released on the [kofi page](https://ko-fi.com/lollypopstealer).
+Added update function to the satisfactory branch of the gsh script. This will allow you to update the satisfactory game files easily if you have set the `SKIPUPDATE` variable to true in the `satisfactory.env` file. There are plans for the script to allow you to edit the respective files of the containers and environments with your editor of choice as well however there is currently no timeline by which this feature release is planned. I will keep you updated as to when this feature is released on the [kofi page](https://ko-fi.com/lollypopstealer).
+
+Also added archive function to factorio branch of the gsh script. This allows the user to archive the save files of the factorio server for easy switching to another playthrough of factorio. NOTE: You will need to edit and/or remove any files necessary to change to the playthrough you want play next. There will be a future update containing a feature release to automatically edit certain files and delete the `.zip` files in the save directory however this will need to be deliberated on how best to implement those edits and file deletions to best suit the user.
 
 ### Announcement 09/15/2024
 
@@ -39,6 +41,12 @@ Working on getting bugs worked out for the Satisfactory 1.0 release. I will have
 - No other ideas are currently in the works but I will keep this announcement section up to date with progress. If you have any suggestions or ideas please don't hesitate to contact me at dev+gsh-feature-requests@lollypopstealer.com as I don't really go on github unless I'm merging the 'nightly' branch to the main branch.
 
 ## Release Notes
+
+### Release 10/09/2024
+
+- Added `update` function to satisfactory branch of the gsh script
+
+- Added `archive` function to the factorio branch of the gsh script
 
 ### Release 08/28/2024
 
