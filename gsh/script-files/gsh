@@ -63,7 +63,7 @@ then
         echo "What name would best describe the general theme of the playthrough? You can type anything and it will be prefixed to the archive file name. 'Modded' in this scenario means things like space exploration playthroughs and such so if you just played a lightly modded vanilla run please type things like 'vanilla' to differentiate them."
         read ans2
         ans2=$(echo "$ans2" | awk '{print toupper($0)}')
-          if [ $status == '"running"' ]
+          if [ "$status" == '"running"' ]
           then
             docker compose -f $fi down
             mkdir -p $PWD/gsh-factorio-save-archives
@@ -72,7 +72,7 @@ then
             sudo tar -czf $PWD/gsh-factorio-save-archives/$ans2.gsh-docker-archive.tar.gz /usr/gsh/docker/factorio/saves
           fi
       else
-        if [ $status == '"running"' ]
+        if [ "$status" == '"running"' ]
         then
           docker compose -f $fi down
           sudo tar -czf $PWD/gsh-factorio-save-archives/PURE-VANILLA.gsh-docker-archive.tar.gz /usr/gsh/docker/factorio/saves
@@ -293,7 +293,7 @@ else
         echo "What name would best describe the general theme of the playthrough? You can type anything and it will be prefixed to the archive file name. 'Modded' in this scenario means things like space exploration playthroughs and such so if you just played a lightly modded vanilla run please type things like 'vanilla' to differentiate them."
         read ans2
         ans2=$(echo "$ans2" | awk '{print toupper($0)}')
-          if [ $status == '"running"' ]
+          if [ "$status" == '"running"' ]
           then
             docker compose -f $fi down
             mkdir -p $PWD/gsh-factorio-save-archives
@@ -302,12 +302,12 @@ else
             tar -czf $PWD/gsh-factorio-save-archives/$ans2.gsh-docker-archive.tar.gz /usr/gsh/docker/factorio/saves
           fi
       else
-        if [ $status == '"running"' ]
+        if [ "$status" == '"running"' ]
         then
           docker compose -f $fi down
-          sudo tar -czf $PWD/gsh-factorio-save-archives/PURE-VANILLA.gsh-docker-archive.tar.gz /usr/gsh/docker/factorio/saves
+          tar -czf $PWD/gsh-factorio-save-archives/PURE-VANILLA.gsh-docker-archive.tar.gz /usr/gsh/docker/factorio/saves
         else
-          sudo tar -czf $PWD/gsh-factorio-save-archives/PURE-VANILLA.gsh-docker-archive.tar.gz /usr/gsh/docker/factorio/saves
+          tar -czf $PWD/gsh-factorio-save-archives/PURE-VANILLA.gsh-docker-archive.tar.gz /usr/gsh/docker/factorio/saves
         fi
       fi
     elif [ "$2" == "--help" ]
