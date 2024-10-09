@@ -84,15 +84,16 @@ then
     elif [ "$2" == "recreate" ]
     then
       docker compose -f $fi up -d --force-recreate
-    elif [ "$2" == "update"]
+    elif [ "$2" == "update" ]
     then
       curvar=$(cat $envfi | grep "SKIPUPDATE")
-      repvar="SKIPUPDATE=true"
+      repvar="SKIPUPDATE=false"
       sed -i 's.$curvar.$repvar.g' $envfi
       docker compose -f $fi down
       docker compose -f $fi pull
       docker compose -f $fi up -d
-      while [ $c -ne 1 ]
+      c=0
+      while [[ $c -ne 1 ]]
       do
         docker compose -f $fi logs > /tmp/container-logs.log
         conterm="LogServer: Display: Server API listening on '0.0.0.0:7777'"
