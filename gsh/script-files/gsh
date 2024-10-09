@@ -69,14 +69,17 @@ then
             mkdir -p $PWD/gsh-factorio-save-archives
             sudo tar -czf $PWD/gsh-factorio-save-archives/$ans2.gsh-docker-archive.tar.gz /usr/gsh/docker/factorio/saves
           else
+            mkdir -p $PWD/gsh-factorio-save-archives
             sudo tar -czf $PWD/gsh-factorio-save-archives/$ans2.gsh-docker-archive.tar.gz /usr/gsh/docker/factorio/saves
           fi
       else
         if [ "$status" == '"running"' ]
         then
           docker compose -f $fi down
+          mkdir -p $PWD/gsh-factorio-save-archives
           sudo tar -czf $PWD/gsh-factorio-save-archives/PURE-VANILLA.gsh-docker-archive.tar.gz /usr/gsh/docker/factorio/saves
         else
+          mkdir -p $PWD/gsh-factorio-save-archives
           sudo tar -czf $PWD/gsh-factorio-save-archives/PURE-VANILLA.gsh-docker-archive.tar.gz /usr/gsh/docker/factorio/saves
         fi
       fi
@@ -299,14 +302,17 @@ else
             mkdir -p $PWD/gsh-factorio-save-archives
             tar -czf $PWD/gsh-factorio-save-archives/$ans2.gsh-docker-archive.tar.gz /usr/gsh/docker/factorio/saves
           else
+            mkdir -p $PWD/gsh-factorio-save-archives
             tar -czf $PWD/gsh-factorio-save-archives/$ans2.gsh-docker-archive.tar.gz /usr/gsh/docker/factorio/saves
           fi
       else
         if [ "$status" == '"running"' ]
         then
           docker compose -f $fi down
+          mkdir -p $PWD/gsh-factorio-save-archives
           tar -czf $PWD/gsh-factorio-save-archives/PURE-VANILLA.gsh-docker-archive.tar.gz /usr/gsh/docker/factorio/saves
         else
+          mkdir -p $PWD/gsh-factorio-save-archives
           tar -czf $PWD/gsh-factorio-save-archives/PURE-VANILLA.gsh-docker-archive.tar.gz /usr/gsh/docker/factorio/saves
         fi
       fi
