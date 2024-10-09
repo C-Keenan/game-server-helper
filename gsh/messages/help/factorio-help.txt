@@ -8,6 +8,7 @@ Commands:
   tail-logs    Same as if you ran 'docker compose logs -f' in /usr/gsh/docker/factorio
   restart      Restarts the container in the same way as if you had run the `docker compose restart` command in /usr/gsh/docker/factorio
   recreate     Recreates the container in the same way as if you had run the `docker compose up -d --force-recreate` command in /usr/gsh/docker/factorio
+  archive      Used to archive the save files of a specific modded or un-modded playthrough for easy change to other playthroughs. (NOTE: To change to another playthrough you must delete the saves yourself and edit any necessary files to support the new playthrough.)
 
   --help       Shows this message
 
