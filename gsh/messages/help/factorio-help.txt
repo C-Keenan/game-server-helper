@@ -6,6 +6,8 @@ Commands:
   pull         Pulls the factorio docker image specified in /usr/gsh/docker/factorio/docker-compose.yml
   logs         Same as if you ran 'docker compose logs' in /usr/gsh/docker/factorio
   tail-logs    Same as if you ran 'docker compose logs -f' in /usr/gsh/docker/factorio
+  restart      Restarts the container in the same way as if you had run the `docker compose restart` command in /usr/gsh/docker/factorio
+  recreate     Recreates the container in the same way as if you had run the `docker compose up -d --force-recreate` command in /usr/gsh/docker/factorio
 
   --help       Shows this message
 
