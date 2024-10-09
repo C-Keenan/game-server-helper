@@ -2,6 +2,10 @@
 
 ## Announcements
 
+### Announcement 10/09/2024
+
+Added update function to the satisfactory branch of the gsh script. this will allow you to update the satisfactory game files easily if you have set the `SKIPUPDATE` variable to true in the `satisfactory.env` file. There are plans for the script to allow you to edit the respective files of the containers and environments with your editor of choice as well however there is currently no timeline by which this feature release is planned. I will keep you updated as to when this feature is released on the [kofi page](https://ko-fi.com/lollypopstealer)
+
 ### Announcement 09/15/2024
 
 Apologies for the wait. The bug I was experiencing seems to have been because Satisfactory was running in a virtualized environment. This can be fixed by passing the name of your CPU to the virtual machine. Please follow your hypervisors documentation on changing how the virtual CPU is named.
