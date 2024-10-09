@@ -6,5 +6,7 @@ Commands:
   pull         Pulls the veloren docker image specified in /usr/gsh/docker/veloren/docker-compose.yml
   logs         Same as if you ran 'docker compose logs' in /usr/gsh/docker/veloren
   tail-logs    Same as if you ran 'docker compose logs -f' in /usr/gsh/docker/veloren
+  restart      Restarts the container in the same way as if you had run the `docker compose restart` command in /usr/gsh/docker/veloren
+  recreate     Recreates the container in the same way as if you had run the `docker compose up -d --force-recreate` command in /usr/gsh/docker/veloren
   
   --help       Shows this message
