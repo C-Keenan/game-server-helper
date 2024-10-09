@@ -5,7 +5,7 @@ ans=$(echo $ans | awk '{print tolower($0)}')
 if [ "$ans" == "yes" ]
 then
     echo "Do you plan on playing them without the use of 'Game Server Helper' or should they be archived for safe keeping?"
-    echo "Options: 1.Still Playing 2.Archive"
+    echo "Options: 1.Still Playing 2.Archive 3.Archive only"
     read num
     if [ $num -eq 1 ]
     then
@@ -73,6 +73,24 @@ then
             cd - > /dev/null
             sed -i "s.alias gsh='bash /usr/gsh/script-files/gsh'..g" $HOME/.bashrc
             echo "Uninstall completed."
+        fi
+    elif [ $num -eq 3 ]
+    then
+        if [ -f /usr/bin/sudo ]
+        then
+            if [ $EUID -eq 0 ]
+            then
+                echo "Understood. Archiving docker folder to $PWD/gsh-docker-archive.tar.gz ."
+                tar -czf gsh-docker-archive.tar.gz /usr/gsh/docker
+            elif [ $EUID -ge 1000 ]
+            then
+                echo "Understood. Archiving docker folder to $PWD/gsh-docker-archive.tar.gz ."
+                sudo tar -czf gsh-docker-archive.tar.gz /usr/gsh/docker
+            fi
+        elif ! [ -f /usr/bin/sudo ]
+        then
+            echo "Understood. Archiving docker folder to $PWD/gsh-docker-archive.tar.gz ."
+            tar -czf gsh-docker-archive.tar.gz /usr/gsh/docker
         fi
     fi
 elif [ "$ans" == "no" ]

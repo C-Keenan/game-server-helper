@@ -11,6 +11,7 @@ if [ -f /usr/bin/sudo ]
 then
   if [ "$1" == "factorio" ]
   then
+    fi="/usr/gsh/docker/factorio/docker-compose.yml"
     if [ "$2" == "up" ]
     then
       docker compose -f /usr/gsh/docker/factorio/docker-compose.yml up -d
@@ -50,6 +51,38 @@ then
     elif [ "$2" == "recreate" ]
     then
       docker compose -f /usr/gsh/docker/factorio/docker-compose.yml up -d --force-recreate
+    elif [ "$2" == "archive" ]
+    then
+      status=$(docker ps -a --format json | grep factorio | jq .State)
+      echo "Were you playing a modded versions of factorio? y/N"
+      echo "Reply with 'Y' if any mods were used and with 'N' if ABSOLUTLY no mods were used in the playthrough. If you reply with 'N' the prefix used will be 'PURE-VANILLA' and it will overwrite any already created archive file with that prefix."
+      read ans
+      ans=$(echo "$ans" | awk '{print toupper($0)}')
+      if [ "$ans" == "Y" ]
+      then
+        echo "What name would best describe the general theme of the playthrough? You can type anything and it will be prefixed to the archive file name. 'Modded' in this scenario means things like space exploration playthroughs and such so if you just played a lightly modded vanilla run please type things like 'vanilla' to differentiate them."
+        read ans2
+        ans2=$(echo "$ans2" | awk '{print toupper($0)}')
+          if [ "$status" == '"running"' ]
+          then
+            docker compose -f $fi down
+            mkdir -p $PWD/gsh-factorio-save-archives
+            sudo tar -czf $PWD/gsh-factorio-save-archives/$ans2.gsh-docker-archive.tar.gz /usr/gsh/docker/factorio/saves
+          else
+            mkdir -p $PWD/gsh-factorio-save-archives
+            sudo tar -czf $PWD/gsh-factorio-save-archives/$ans2.gsh-docker-archive.tar.gz /usr/gsh/docker/factorio/saves
+          fi
+      else
+        if [ "$status" == '"running"' ]
+        then
+          docker compose -f $fi down
+          mkdir -p $PWD/gsh-factorio-save-archives
+          sudo tar -czf $PWD/gsh-factorio-save-archives/PURE-VANILLA.gsh-docker-archive.tar.gz /usr/gsh/docker/factorio/saves
+        else
+          mkdir -p $PWD/gsh-factorio-save-archives
+          sudo tar -czf $PWD/gsh-factorio-save-archives/PURE-VANILLA.gsh-docker-archive.tar.gz /usr/gsh/docker/factorio/saves
+        fi
+      fi
     elif [ "$2" == "--help" ]
     then
       cat /usr/gsh/messages/help/factorio-help.txt
@@ -211,6 +244,7 @@ then
 else
   if [ "$1" == "factorio" ]
   then
+    fi="/usr/gsh/docker/factorio/docker-compose.yml"
     if [ "$2" == "up" ]
     then
       docker compose -f /usr/gsh/docker/factorio/docker-compose.yml up -d
@@ -250,6 +284,38 @@ else
     elif [ "$2" == "recreate" ]
     then
       docker compose -f /usr/gsh/docker/factorio/docker-compose.yml up -d --force-recreate
+    elif [ "$2" == "archive" ]
+    then
+      status=$(docker ps -a --format json | grep factorio | jq .State)
+      echo "Were you playing a modded versions of factorio? y/N"
+      echo "Reply with 'Y' if any mods were used and with 'N' if ABSOLUTLY no mods were used in the playthrough. If you reply with 'N' the prefix used will be 'PURE-VANILLA' and it will overwrite any already created archive file with that prefix."
+      read ans
+      ans=$(echo "$ans" | awk '{print toupper($0)}')
+      if [ "$ans" == "Y" ]
+      then
+        echo "What name would best describe the general theme of the playthrough? You can type anything and it will be prefixed to the archive file name. 'Modded' in this scenario means things like space exploration playthroughs and such so if you just played a lightly modded vanilla run please type things like 'vanilla' to differentiate them."
+        read ans2
+        ans2=$(echo "$ans2" | awk '{print toupper($0)}')
+          if [ "$status" == '"running"' ]
+          then
+            docker compose -f $fi down
+            mkdir -p $PWD/gsh-factorio-save-archives
+            tar -czf $PWD/gsh-factorio-save-archives/$ans2.gsh-docker-archive.tar.gz /usr/gsh/docker/factorio/saves
+          else
+            mkdir -p $PWD/gsh-factorio-save-archives
+            tar -czf $PWD/gsh-factorio-save-archives/$ans2.gsh-docker-archive.tar.gz /usr/gsh/docker/factorio/saves
+          fi
+      else
+        if [ "$status" == '"running"' ]
+        then
+          docker compose -f $fi down
+          mkdir -p $PWD/gsh-factorio-save-archives
+          tar -czf $PWD/gsh-factorio-save-archives/PURE-VANILLA.gsh-docker-archive.tar.gz /usr/gsh/docker/factorio/saves
+        else
+          mkdir -p $PWD/gsh-factorio-save-archives
+          tar -czf $PWD/gsh-factorio-save-archives/PURE-VANILLA.gsh-docker-archive.tar.gz /usr/gsh/docker/factorio/saves
+        fi
+      fi
     elif [ "$2" == "--help" ]
     then
       cat /usr/gsh/messages/help/factorio-help.txt
