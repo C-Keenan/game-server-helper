@@ -6,5 +6,8 @@ Commands:
   pull         Pulls the satisfactory docker image specified in /usr/gsh/docker/satisfactory/docker-compose.yml
   logs         Same as if you ran 'docker compose logs' in /usr/gsh/docker/satisfactory
   tail-logs    Same as if you ran 'docker compose logs -f' in /usr/gsh/docker/satisfactory
+  restart      Restarts the container in the same way as if you had run the `docker compose restart` command in /usr/gsh/docker/satisfactory
+  recreate     Recreates the container in the same way as if you had run the `docker compose up -d --force-recreate` command in /usr/gsh/docker/satisfactory
+  update       Because the behaviour of the container is controlled by environment variables and can be set to skip the update of the game within the container this command changes the variable of "SKIPUPDATE" to false whether it was set to true or not and then restarts the container to update the game it then will set the variable back to what it had been set to originally and restart the container again to allow for changes to apply
   
   --help       Shows this message
