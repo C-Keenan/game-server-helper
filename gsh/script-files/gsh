@@ -11,6 +11,7 @@ if [ -f /usr/bin/sudo ]
 then
   if [ "$1" == "factorio" ]
   then
+    fi="/usr/gsh/docker/factorio/docker-compose.yml"
     if [ "$2" == "up" ]
     then
       docker compose -f /usr/gsh/docker/factorio/docker-compose.yml up -d
@@ -239,6 +240,7 @@ then
 else
   if [ "$1" == "factorio" ]
   then
+    fi="/usr/gsh/docker/factorio/docker-compose.yml"
     if [ "$2" == "up" ]
     then
       docker compose -f /usr/gsh/docker/factorio/docker-compose.yml up -d
