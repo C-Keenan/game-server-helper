@@ -89,7 +89,7 @@ then
       curvar=$(cat $envfi | grep "SKIPUPDATE")
       repvar="SKIPUPDATE=false"
       cat $envfi
-      sudo sed -i 's.$curvar.$repvar.g' $envfi
+      sudo sed -i "s.$curvar.$repvar.g" $envfi
       cat $envfi
       docker compose -f $fi down
       docker compose -f $fi pull
@@ -109,7 +109,7 @@ then
       done
       docker compose -f $fi down
       cat $envfi
-      sudo sed -i 's.$repvar.$curvar.g' $envfi
+      sudo sed -i "s.$repvar.$curvar.g" $envfi
       cat $envfi
       docker compose -f $fi up -d
     elif [ "$2" == "--help" ]
