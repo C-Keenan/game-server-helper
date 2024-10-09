@@ -76,8 +76,22 @@ then
         fi
     elif [ $num -eq 3 ]
     then
-        echo "Understood. Archiving docker folder to $PWD/gsh-docker-archive.tar.gz ."
-        tar -czf gsh-docker-archive.tar.gz /usr/gsh/docker
+        if [ -f /usr/bin/sudo ]
+        then
+            if [ $EUID -eq 0 ]
+            then
+                echo "Understood. Archiving docker folder to $PWD/gsh-docker-archive.tar.gz ."
+                tar -czf gsh-docker-archive.tar.gz /usr/gsh/docker
+            elif [ $EUID -ge 1000 ]
+            then
+                echo "Understood. Archiving docker folder to $PWD/gsh-docker-archive.tar.gz ."
+                sudo tar -czf gsh-docker-archive.tar.gz /usr/gsh/docker
+            fi
+        elif ! [ -f /usr/bin/sudo ]
+        then
+            echo "Understood. Archiving docker folder to $PWD/gsh-docker-archive.tar.gz ."
+            tar -czf gsh-docker-archive.tar.gz /usr/gsh/docker
+        fi
     fi
 elif [ "$ans" == "no" ]
 then
