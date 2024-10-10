@@ -474,6 +474,32 @@ else
   elif [ "$1" == "uninstall" ]
   then
     bash /usr/gsh/script-files/uninstall
+  elif [ "$1" == "time" ]
+  then
+    time=$(date | colrm 1 11 | colrm 9)
+    h=$(echo $time | awk -F ":" '{print $1}')
+    m=$(echo $time | awk -F ":" '{print $2}')
+    s=$(echo $time | awk -F ":" '{print $3}')
+    if [ -f /usr/gsh/environment/restart.env ]
+    then
+      source /usr/gsh/environment/restart.env
+    fi
+    if [[ $h -eq $reshr ]]
+    then
+      if [[ $m -eq $resmin ]]
+      then
+        if [ -f /usr/gsh/environment/notification.env ]
+        then
+          source /usr/gsh/environment/notification.env
+          msg="Server restarting in 15 minutes!"
+          curl -u $usr:$pswd -d "$msg" $url
+          echo $msg >> /var/log/gsh/alerts.log
+        else
+          msg="Server restarting in 15 minutes!"
+          echo $msg >> /var/log/gsh/alerts.log
+        fi
+      fi
+    fi
   elif [ "$1" == "--help" ]
   then
     cat /usr/gsh/messages/help/help.txt
