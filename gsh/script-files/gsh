@@ -223,7 +223,7 @@ then
     h=$(echo $time | awk -F ":" '{print $1}')
     m=$(echo $time | awk -F ":" '{print $2}')
     s=$(echo $time | awk -F ":" '{print $3}')
-    printf '%d:%d:%d\n' $h $m $s
+    printf '%dd:%dd:%dd\n' $h $m $s
   elif [ "$1" == "--help" ]
   then
     cat /usr/gsh/messages/help/help.txt
