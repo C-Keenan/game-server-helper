@@ -217,6 +217,13 @@ then
   elif [ "$1" == "uninstall" ]
   then
     bash /usr/gsh/script-files/uninstall
+  elif [ "$1" == "time" ]
+  then
+    time=$(date | colrm 1 11 | colrm 9)
+    h=$(echo $time | awk -F ":" '{print $1}')
+    m=$(echo $time | awk -F ":" '{print $2}')
+    s=$(echo $time | awk -F ":" '{print $3}')
+    printf '%dh:%dm:%ds\n' $h $m $s
   elif [ "$1" == "--help" ]
   then
     cat /usr/gsh/messages/help/help.txt
