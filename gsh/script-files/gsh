@@ -121,6 +121,7 @@ then
     then
       curvar=$(cat $envfi | grep "SKIPUPDATE")
       repvar="SKIPUPDATE=false"
+      constat=$(docker ps -a --format json | grep satisfactory | jq .State)
       sudo sed -i "s.$curvar.$repvar.g" $envfi
       docker compose -f $fi down
       docker compose -f $fi pull
