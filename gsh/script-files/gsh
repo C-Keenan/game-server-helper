@@ -140,7 +140,10 @@ then
       done
       docker compose -f $fi down
       sudo sed -i "s.$repvar.$curvar.g" $envfi
-      docker compose -f $fi up -d
+      if [ "$constat" == '"running"' ]
+      then
+        docker compose -f $fi up -d
+      fi
     elif [ "$2" == "--help" ]
     then
       cat /usr/gsh/messages/help/satisfactory-help.txt
@@ -378,6 +381,7 @@ else
     then
       curvar=$(cat $envfi | grep "SKIPUPDATE")
       repvar="SKIPUPDATE=false"
+      constat=$(docker ps -a --format json | grep satisfactory | jq .State)
       sed -i "s.$curvar.$repvar.g" $envfi
       docker compose -f $fi down
       docker compose -f $fi pull
@@ -397,7 +401,10 @@ else
       done
       docker compose -f $fi down
       sed -i "s.$repvar.$curvar.g" $envfi
-      docker compose -f $fi up -d
+      if [ "$constat" == '"running"' ]
+      then
+        docker compose -f $fi up -d
+      fi
     elif [ "$2" == "--help" ]
     then
       cat /usr/gsh/messages/help/satisfactory-help.txt
