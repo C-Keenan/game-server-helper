@@ -2,6 +2,12 @@
 
 ## Announcements
 
+### Announcement 10/14/2024
+
+Changed satisfactory update function to check if the container is running before deciding if it should be started again after the update. 
+
+Added gsh time command to work together with any notification service that allows posting messages with the `curl` command that sends an alert that the host server is about to restart, enable this command in your `/etc/crontab` or user crontab with `crontab -e` and set it to `*/1 * * * *` to allow it to check every minute for accuracy. Set the environment variables, `reshr` and `resmin`, in the `/usr/gsh/environment/restart.env` to 15 minutes before the host server actually restarts for message accuracy and don't forget to set the `usr`, `pswd`, and `url` variables in the `/usr/gsh/environment/notification.env` file to properly authenticate with your selected, `curl` enabled, notification provider.
+
 ### Announcement 10/09/2024
 
 Added update function to the satisfactory branch of the gsh script. This will allow you to update the satisfactory game files easily if you have set the `SKIPUPDATE` variable to true in the `satisfactory.env` file. There are plans for the script to allow you to edit the respective files of the containers and environments with your editor of choice as well however there is currently no timeline by which this feature release is planned. I will keep you updated as to when this feature is released on the [kofi page](https://ko-fi.com/lollypopstealer).
@@ -41,6 +47,10 @@ Working on getting bugs worked out for the Satisfactory 1.0 release. I will have
 - No other ideas are currently in the works but I will keep this announcement section up to date with progress. If you have any suggestions or ideas please don't hesitate to contact me at dev+gsh-feature-requests@lollypopstealer.com as I don't really go on github unless I'm merging the 'nightly' branch to the main branch.
 
 ## Release Notes
+
+### Release 10/14/2024
+
+- Added `gsh time` command to allow for easy host server restart notifications with any `curl` enabled notification provider
 
 ### Release 10/09/2024
 
