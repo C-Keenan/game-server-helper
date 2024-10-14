@@ -54,7 +54,7 @@ Working on getting bugs worked out for the Satisfactory 1.0 release. I will have
 
 - Changed to Jquery processing for timer function for 'Factorio' as I realized the limitations of the colrm command as I had it configured before
 
-- Changed to acl control of env instead of sudo. The command, if you need to set up more users for access, is `setfacl -m u:${USER}:rw /usr/gsh/environment/donation-ticker.env` . Replace `${USER}` with the username of the user. If not running as root you will need 'sudo' privledges to edit the acl rules, as set forth by the acl package. If adding more than the installing user you may want to add the alias to their `.bashrc` or `.bash_aliases` with the command `"alias gsh='bash /usr/gsh/script-files/gsh'" >> ~/.bashrc` .
+- Changed to acl control of env instead of sudo. The command, if you need to set up more users for access, is `setfacl -m u:${USER}:rw /usr/gsh/environment/donation-ticker.env` . Replace `${USER}` with the username of the user. If not running as root you will need 'sudo' privledges to edit the acl rules, as set forth by the acl package. If adding more than the installing user you may want to add the alias to their `.bashrc` or `.bash_aliases` with the command `echo "alias gsh='bash /usr/gsh/script-files/gsh'" >> ~/.bashrc` .
 
 - A more in depth installer shall be released soon that will account for system-wide aliasing for this script
 
