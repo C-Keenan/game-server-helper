@@ -21,24 +21,24 @@ then
             if [ $EUID -eq 0 ]
             then
                 cd /usr
-                rm -rf ./gsh
+                mv ./gsh /tmp
                 cd - > /dev/null
-                sed -i "s.alias gsh='bash /usr/gsh/script-files/gsh'..g" $HOME/.bashrc
+                sed -i "s.alias gsh='bash /usr/gsh/script-files/gsh'.alias gsh='bash /tmp/gsh/script-files/gsh.g" $HOME/.bashrc
                 echo "Uninstall completed."
             elif [ $EUID -ge 1000 ]
             then
                 cd /usr
-                sudo rm -rf ./gsh
+                sudo mv ./gsh /tmp
                 cd - > /dev/null
-                sed -i "s.alias gsh='bash /usr/gsh/script-files/gsh'..g" $HOME/.bashrc
+                sed -i "s.alias gsh='bash /usr/gsh/script-files/gsh'.alias gsh='bash /tmp/gsh/script-files/gsh.g" $HOME/.bashrc
                 echo "Uninstall completed."
             fi
         elif ! [ -f /usr/bin/sudo ]
         then
             cd /usr
-            rm -rf ./gsh
+            mv ./gsh /tmp
             cd - > /dev/null
-            sed -i "s.alias gsh='bash /usr/gsh/script-files/gsh'..g" $HOME/.bashrc
+            sed -i "s.alias gsh='bash /usr/gsh/script-files/gsh'.alias gsh='bash /tmp/gsh/script-files/gsh.g" $HOME/.bashrc
             echo "Uninstall completed."
         fi
     elif [ $num -eq 2 ]
@@ -54,24 +54,24 @@ then
             if [ $EUID -eq 0 ]
             then
                 cd /usr
-                rm -rf ./gsh
+                mv ./gsh /tmp
                 cd - > /dev/null
-                sed -i "s.alias gsh='bash /usr/gsh/script-files/gsh'..g" $HOME/.bashrc
+                sed -i "s.alias gsh='bash /usr/gsh/script-files/gsh'.alias gsh='bash /tmp/gsh/script-files/gsh.g" $HOME/.bashrc
                 echo "Uninstall completed."
             elif [ $EUID -ge 1000 ]
             then
                 cd /usr
-                sudo rm -rf ./gsh
+                sudo mv ./gsh /tmp
                 cd - > /dev/null
-                sed -i "s.alias gsh='bash /usr/gsh/script-files/gsh'..g" $HOME/.bashrc
+                sed -i "s.alias gsh='bash /usr/gsh/script-files/gsh'.alias gsh='bash /tmp/gsh/script-files/gsh.g" $HOME/.bashrc
                 echo "Uninstall completed."
             fi
         elif ! [ -f /usr/bin/sudo ]
         then
             cd /usr
-            rm -rf ./gsh
+            mv ./gsh /tmp
             cd - > /dev/null
-            sed -i "s.alias gsh='bash /usr/gsh/script-files/gsh'..g" $HOME/.bashrc
+            sed -i "s.alias gsh='bash /usr/gsh/script-files/gsh'.alias gsh='bash /tmp/gsh/script-files/gsh.g" $HOME/.bashrc
             echo "Uninstall completed."
         fi
     elif [ $num -eq 3 ]
@@ -101,24 +101,24 @@ then
         if [ $EUID -eq 0 ]
         then
             cd /usr
-            rm -rf ./gsh
+            mv ./gsh /tmp
             cd - > /dev/null
-            sed -i "s.alias gsh='bash /usr/gsh/script-files/gsh'..g" $HOME/.bashrc
+            sed -i "s.alias gsh='bash /usr/gsh/script-files/gsh'.alias gsh='bash /tmp/gsh/script-files/gsh.g" $HOME/.bashrc
             echo "Uninstall completed."
         elif [ $EUID -ge 1000 ]
         then
             cd /usr
-            sudo rm -rf ./gsh
+            sudo mv ./gsh /tmp
             cd - > /dev/null
-            sed -i "s.alias gsh='bash /usr/gsh/script-files/gsh'..g" $HOME/.bashrc
+            sed -i "s.alias gsh='bash /usr/gsh/script-files/gsh'.alias gsh='bash /tmp/gsh/script-files/gsh.g" $HOME/.bashrc
             echo "Uninstall completed."
         fi
     elif ! [ -f /usr/bin/sudo ]
     then
         cd /usr
-        rm -rf ./gsh
+        mv ./gsh /tmp
         cd - > /dev/null
-        sed -i "s.alias gsh='bash /usr/gsh/script-files/gsh'..g" $HOME/.bashrc
+        sed -i "s.alias gsh='bash /usr/gsh/script-files/gsh'.alias gsh='bash /tmp/gsh/script-files/gsh.g" $HOME/.bashrc
         echo "Uninstall completed."
     fi
 fi
