@@ -85,7 +85,7 @@ then
                     ec=$?
                     if [ $ec -eq 0 ]
                     then
-                        echo "Extracted contents if gsh-docker-archive.tar.gz successfully. Moving to next step."
+                        echo "Extracted contents of gsh-docker-archive.tar.gz successfully. Moving to next step."
                     else
                         echo "Failed to properly extract archive contents! Exiting..."
                         exit 1
