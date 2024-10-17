@@ -221,6 +221,21 @@ then
   elif [ "$1" == "uninstall" ]
   then
     bash /usr/gsh/script-files/uninstall
+  elif [ "$1" == "recover" ]
+  then
+    if [ -d /tmp/gsh ]
+    then
+      echo "Understood. Moving files back to their original location. Please wait..."
+      sudo mv /tmp/gsh /usr
+      echo "Moving of files has been completed. Thank you for your patience."
+    else
+      if [ -f /usr/gsh/environment/backup.env ]
+      then
+        source /usr/gsh/environment/backup.env
+        echo "Folder `/tmp/gsh` does not exist. This can be because you have not run the `gsh uninstall` command or because the system was restarted after the uninstall process. If you have run the uninstall command and the folder no longer exists you may find that your backups located at /home/$USER/gsh-backups is still intact and the necessary scripts to restore the last backup are located within that folder. Please run the restore script and all should be as it was as of the last backup which occured on $lastbk"
+      fi
+      echo "Folder `/tmp/gsh` does not exist. This can be because you have not run the `gsh uninstall` command or because the system was restarted after the uninstall process. If you have run the uninstall command and the folder no longer exists then your files are gone for good and you must start over as a backup has never been run before."
+    fi
   elif [ "$1" == "time" ]
   then
     time=$(date | colrm 1 11 | colrm 9)
