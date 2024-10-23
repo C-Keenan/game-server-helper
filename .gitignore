@@ -51,4 +51,6 @@ credentials.json
 # Ignore files specific to your project
 
 # Add any additional files or directories to ignore below this line
+
+# Add any files or folder currently being worked on
 gsh/gsh-backups/*
